@@ -1,0 +1,73 @@
+"DESCRIPTION","INIT_ENV","INPUT","EXPECT_TYPE","EXPECT_NAME1","EXPECT_VALUE1","EXPECT_NAME2","EXPECT_VALUE2","EXPECT_NAME3","EXPECT_VALUE3","EXPECT_NAME4","EXPECT_VALUE4","EXPECT_NAME5","EXPECT_VALUE5",EXPECT_NAME6,EXPECT_VALUE6,"COMMENT"
+expand variable,"{""TEST_NAME1"":""ABC""
+,""TEST_NAME2"":""123""}","TEST001=$TEST_NAME1
+TEST002=$TEST_NAME1$TEST_NAME2
+TEST003=$TEST_NAME1@ABC1
+TEST004=$TEST_NAME1:ABC2
+",,"TEST001","ABC","TEST002","ABC123","TEST003","ABC@ABC1","TEST004","ABC:ABC2",,,,,
+use variable,,"USER_DIR=/home/user
+LOG_DIR=$USER_DIR/logs",,"USER_DIR","/home/user","LOG_DIR","/home/user/logs",,,,,,,,,
+"overwrite variable ","{""TEST_PATH1"":""/var/home/sample1""
+,""TEST_PATH2"":""/var/home/sample2""}
+","TEST_PATH1=/data/db:$TEST_PATH1
+TEST_PATH2=$TEST_PATH2:/data/db
+",,"TEST_PATH1","/data/db:/var/home/sample1","TEST_PATH2","/var/home/sample2:/data/db",,,,,,,,,
+not found variable name,,"VAR=$$INVALID_VAR
+ANOTHER_VAR=$NOT_A_VAR
+",,"VAR","$","ANOTHER_VAR",,,,,,,,,,
+expand variable,"{""TEST"":""123""
+,""TEST_01"":""TEST""}
+","TEST01=@$$TEST_01@
+",,"TEST01","@$TEST@",,,,,,,,,,,
+tail comment,"{""TEST_1"":""ABC""
+,""TEST"":""123""}","TEST001=$TEST_1#comment
+TEST002=$TEST_1 #comment
+TEST003=$TEST_1:#comment
+TEST004=$TEST#_1comment
+",,"TEST001","ABC","TEST002","ABC","TEST003","ABC:","TEST004","123",,,,,
+expand variable,"{""TEST_NAME1"":""ABC""
+,""TEST_NAME2"":""123""}","TEST001=""$TEST_NAME1""
+TEST002=""$TEST_NAME1$TEST_NAME2""
+TEST003=""$TEST_NAME1@ABC1""
+TEST004=""$TEST_NAME1:ABC2""
+",,"TEST001","ABC","TEST002","ABC123","TEST003","ABC@ABC1","TEST004","ABC:ABC2",,,,,
+double quoted use variable,,"USER_DIR=""/home/user""
+LOG_DIR=""$USER_DIR/logs""",,"USER_DIR","/home/user","LOG_DIR","/home/user/logs",,,,,,,,,
+"double quoted overwrite variable ","{""TEST_PATH1"":""/var/home/sample1""
+,""TEST_PATH2"":""/var/home/sample2""}
+","TEST_PATH1=""/data/db:$TEST_PATH1""
+TEST_PATH2=""$TEST_PATH2:/data/db""
+",,"TEST_PATH1","/data/db:/var/home/sample1","TEST_PATH2","/var/home/sample2:/data/db",,,,,,,,,
+double quoted not found variable name,,"VAR=""$$INVALID_VAR""
+ANOTHER_VAR=""$NOT_A_VAR""
+",,"VAR","$","ANOTHER_VAR",,,,,,,,,,
+double quoted expand variable,"{""TEST"":""123""
+,""TEST_01"":""TEST""}
+","TEST01=""@$$TEST_01@""
+",,"TEST01","@$TEST@",,,,,,,,,,,
+double quoted tail comment,"{""TEST_1"":""ABC""
+,""TEST"":""123""}","TEST001=""$TEST_1""#comment
+TEST002=""$TEST_1"" #comment
+TEST003=""$TEST_1:""#comment
+TEST004=""$TEST""#_1comment
+",,"TEST001","ABC","TEST002","ABC","TEST003","ABC:","TEST004","123",,,,,
+single quoted use variable,,"USER_DIR='/home/user'
+LOG_DIR='$USER_DIR/logs'",,"USER_DIR","/home/user","LOG_DIR","$USER_DIR/logs",,,,,,,,,
+"single quoted overwrite variable ","{""TEST_PATH1"":""/var/home/sample1""
+,""TEST_PATH2"":""/var/home/sample2""}
+","TEST_PATH1='/data/db:$TEST_PATH1'
+TEST_PATH2='$TEST_PATH2:/data/db'
+",,"TEST_PATH1","/data/db:$TEST_PATH1","TEST_PATH2","$TEST_PATH2:/data/db",,,,,,,,,
+single quoted not found variable name,,"VAR='$$INVALID_VAR'
+ANOTHER_VAR='$NOT_A_VAR'
+",,"VAR","$$INVALID_VAR","ANOTHER_VAR","$NOT_A_VAR",,,,,,,,,
+single quoted expand variable,"{""TEST"":""123""
+,""TEST_01"":""TEST""}
+","TEST01='@$$TEST_01@'
+",,"TEST01","@$$TEST_01@",,,,,,,,,,,
+single quoted tail comment,"{""TEST_1"":""ABC""
+,""TEST"":""123""}","TEST001='$TEST_1'#comment
+TEST002='$TEST_1' #comment
+TEST003='$TEST_1:'#comment
+TEST004='$TEST'#_1comment
+",,"TEST001","$TEST_1","TEST002","$TEST_1","TEST003","$TEST_1:","TEST004","$TEST",,,,,
