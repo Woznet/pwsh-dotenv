@@ -1,5 +1,6 @@
 $ErrorActionPreference = 'Stop'
 
+$ModuleVersion = '1.0.0'
 
 $module_root = Join-Path $PSScriptRoot "pwsh-dotenv"
 $manifest_path = Join-Path $module_root pwsh-dotenv.psd1
@@ -28,6 +29,7 @@ $p = @{
     RootModule = "pwsh-dotenv.psm1"
     FunctionsToExport = $export_func
     AliasesToExport = $export_alias
+    ModuleVersion = $ModuleVersion
 }
 
 Update-ModuleManifest @p

@@ -6,6 +6,8 @@ pwsh-dotenv to load environment variables from `.env` .
 
 ## Installation
 
+This library is installable via [PowerShell Gallery](https://www.powershellgallery.com/packages/pwsh-dotenv/):
+
 ```powershell
 Install-Module -Name pwsh-dotenv
 ```
