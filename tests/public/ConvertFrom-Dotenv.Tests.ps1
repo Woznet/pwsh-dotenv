@@ -96,15 +96,16 @@ InModuleScope "pwsh-dotenv" {
 
         }
 
-
     }
 
     Describe "ConvertFrom-Dotenv format test" -ForEach @(
         [PSCustomObject]@{path="$PSScriptRoot/ConvertFrom-Dotenv/format/booleans.csv"; }
         [PSCustomObject]@{path="$PSScriptRoot/ConvertFrom-Dotenv/format/comments.csv"; }
         [PSCustomObject]@{path="$PSScriptRoot/ConvertFrom-Dotenv/format/env.csv"}
+        [PSCustomObject]@{path="$PSScriptRoot/ConvertFrom-Dotenv/format/escape.csv"}
         [PSCustomObject]@{path="$PSScriptRoot/ConvertFrom-Dotenv/variable.csv"}
         [PSCustomObject]@{path="$PSScriptRoot/ConvertFrom-Dotenv/variable_brace.csv"}
+        [PSCustomObject]@{path="$PSScriptRoot/ConvertFrom-Dotenv/format/illegal.csv"; }
     ) {
 
         BeforeAll {
@@ -122,6 +123,32 @@ InModuleScope "pwsh-dotenv" {
             $r | Should -MatchHashtable $_.EXPECT -Because "<$($_.ORG_INPUT)>"
         }
 
+    }
+
+    Describe "ConvertFrom-Dotenv illegal" {
+
+        BeforeEach {
+            $EnvTestPrefix = "z_unit_test_pwsh_dotenv_4329f2cc_7b2e_4999_a0ef_a0b6c614455e_"
+            $BasicEnvName = "${EnvTestPrefix}Test"
+        }
+
+        AfterEach {
+            Remove-Item "Env:\${EnvTestPrefix}*"
+        }
+
+        It "empty key" {
+
+            $in = @(
+                "TEST=1"
+                "EMPTY_LINE"
+            ) -join "`n"
+
+            $r = $in | ConvertFrom-Dotenv -InitialEnv (@{}) -WarningVariable "+convertwarning" 3> $null
+            $r | Should -MatchHashtable (@{TEST = "1" })
+
+            $convertwarning.Message | Should -Be ('invalid line:EMPTY_LINE')
+
+        }
     }
 
 }

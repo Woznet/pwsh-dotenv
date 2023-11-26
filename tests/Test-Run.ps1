@@ -1,7 +1,7 @@
 
 $TestResults = Invoke-Pester $PSScriptRoot -Passthru
 
-$TestResults
+# $TestResults
 
 If (0 -lt $TestResults.FailedCount){
     exit 1

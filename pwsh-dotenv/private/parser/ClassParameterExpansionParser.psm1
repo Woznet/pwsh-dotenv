@@ -39,8 +39,13 @@ class ParameterExpansionParser {
             }
             if ($m.Value.StartsWith('\')) {
                 # escape
-                $this.expansion.AddEscapeString(($this.str[$m.Index..($m.Index + 1)] -join ""))
-                $m = $this.NextMatch($m.Index + 2)
+                if(($m.Index + 1) -lt $this.str.Length){
+                    $this.expansion.AddEscapeString(($this.str[$m.Index..($m.Index + 1)] -join ""))
+                    $m = $this.NextMatch($m.Index + 2)
+                }else{
+                    $this.expansion.AddEscapeString(($this.str[$m.Index..($m.Index)] -join ""))
+                    $m = $this.NextMatch($m.Index + 1)
+                }
             }
             elseif ($m.Value.StartsWith('$')) {
                 # variable
@@ -83,7 +88,7 @@ class ParameterExpansionParser {
             Write-Warning -Message "$($this.GetType()): bad substitution: $($this.str.Substring($start_index))"
             return $this.str.Length
         }
-        
+
         $variable_name = $m.Groups["variable_name"].Value
         if ($m.Value.EndsWith('}')) {
             # ${variable} format
@@ -94,7 +99,7 @@ class ParameterExpansionParser {
             # ${variable: format
             if ("-" -eq $this.str[($m.Index + $m.Length)]) {
                 # ${variable:- format
-                
+
                 $p = [ParameterExpansionParser]::new($this.str)
                 $next_index = $p._Parse($start_index + $m.Length + 1, $nested_levels + 1)
                 if ($next_index -lt 0) {

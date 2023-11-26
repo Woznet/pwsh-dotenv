@@ -20,9 +20,9 @@ function Get-QuotedValueInternal {
     $value = $Matches["value"]
     $tail = $InputObject.Substring($Matches[0].Length)
 
-    if ('"' -eq $Quote) {
-        $value = Expand-EscapesInternal $value
-    }
+    # if ('"' -eq $Quote) {
+    #     $value = Expand-EscapesInternal $value
+    # }
 
     $env_entry = [EnvEntry]::new($value, ('"' -eq $Quote))
 

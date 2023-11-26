@@ -11,16 +11,34 @@ class EscapeStringExpression : Expression {
     }
     [string]Evaluate([EvaluateContext]$context) {
         $val = ""
-        switch ($this.value) {
-            '\' {
-                $val = '\'
+        switch -CaseSensitive ($this.value) {
+            '\t' {
+                $val = "`t"
+            }
+            '\r' {
+                $val = "`r"
+            }
+            '\n' {
+                $val = "`n"
             }
             '\$' {
                 $val = '$'
             }
+            '\\' {
+                $val = '\'
+            }
+            '\"' {
+                $val = '"'
+            }
+            '\''' {
+                $val = ''''
+            }
         }
         if ("" -eq $val) {
-            if ($this.value.StartsWith('\')) {
+            Write-Warning -Message ("unsupported escape " + $this.value)
+            if('\' -eq $this.value){
+                $val = '\'
+            }elseif ($this.value.StartsWith('\')) {
                 $val = $this.value.Substring(1)
             }
             else {

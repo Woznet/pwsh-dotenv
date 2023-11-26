@@ -16,7 +16,7 @@ class EnvEntry {
     }
 
     [string]GetValue([scriptblock]$env_getter) {
-        if ((-not $this.Expand) -or (-not $this.Value.Contains('$'))) {
+        if((-not $this.Expand) -or (-not ($this.Value.Contains('$') -or $this.Value.Contains('\')))){
             return $this.Value
         }
 

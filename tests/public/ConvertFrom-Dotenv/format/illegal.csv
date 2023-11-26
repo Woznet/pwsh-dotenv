@@ -1,0 +1,17 @@
+"DESCRIPTION","INPUT","EXPECT_TYPE","EXPECT_NAME1","EXPECT_VALUE1","EXPECT_NAME2","EXPECT_VALUE2","EXPECT_NAME3","EXPECT_VALUE3","EXPECT_NAME4","EXPECT_VALUE4","EXPECT_NAME5","EXPECT_VALUE5",EXPECT_NAME6,EXPECT_VALUE6,"COMMENT",TEST
+"broken double quote","TEST01=""
+TEST02=123
+",,"TEST01",,"TEST02","123",,,,,,,,,,
+"broken single quote","TEST01='
+TEST02=123
+",,"TEST01",,"TEST02","123",,,,,,,,,,
+"broken escape","TEST01=\
+TEST02=123",,"TEST01","\","TEST02","123",,,,,,,,,,
+"broken escape double quote","TEST01=""\""
+TEST02=123
+",,"TEST01","\","TEST02","123",,,,,,,,,,
+"broken escape single quote","TEST01='\'
+TEST02=123
+",,"TEST01","\","TEST02","123",,,,,,,,,,
+"empty key","EMPTY",,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,
