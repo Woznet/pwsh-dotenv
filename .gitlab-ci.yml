@@ -1,0 +1,10 @@
+stages:
+  - test
+
+unit-test-job:
+  stage: test
+  image: debian:bookworm-slim
+  before_script:
+    - bash .gitlab-ci/docker_install_powershell.sh
+  script:
+    - bash tests/Test-Run.sh
