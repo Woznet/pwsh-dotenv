@@ -12,7 +12,7 @@ function Should-MatchEnvEntry ($ActualValue, $ExpectedValue, [switch] $Negate, [
         $map = [ordered]@{}
         $map["Name"] = $env.Name
         $map["Value"] = $env.Value
-        $map["Expand"] = $env.Expand
+        $map["QuoteType"] = $env.QuoteType
         $map
     }
 

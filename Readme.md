@@ -143,6 +143,10 @@ S="\n" # New line (LF)
 T="\r" # Carriage return (CR)
 U="\t" # Tab
 
+# Single quote Escaping special characters
+SQ='\'' # Single quote
+SR='\\' # Backslash
+
 # Variable expansion
 V=${PWD}
 W="${PWD}"
