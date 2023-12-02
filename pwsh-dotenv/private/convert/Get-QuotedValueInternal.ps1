@@ -11,7 +11,7 @@ function Get-QuotedValueInternal {
 
     $reg_quote = [regex]::Escape($Quote)
 
-    if ($InputObject -notmatch "${script:REG_START}${reg_quote}(?<value>(?:\\${reg_quote}|[^${reg_quote}])*)${reg_quote}${script:REG_SPACE}*(?:#[^\r\n]+)?${script:REG_END}?") {
+    if ($InputObject -notmatch "${script:REG_START}${reg_quote}(?<value>(?:\\\\|\\${reg_quote}|[^${reg_quote}])*)${reg_quote}${script:REG_SPACE}*(?:#[^\r\n]+)?${script:REG_END}?") {
         # broken string
         $first, $tail = Split-LineInternal $tail
         Write-Error "broken quoted value string ${first}" -Category ParserError

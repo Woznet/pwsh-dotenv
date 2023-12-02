@@ -38,6 +38,31 @@ InModuleScope "pwsh-dotenv" {
         }
     }
 
+    Describe "ConvertFrom-Dotenv issue #2" {
+
+        It "broken Backslash escaping" {
+
+
+            $in = @'
+A="\\"
+B="1"
+C='\\'
+D='2'
+E=3
+'@.Trim()
+
+            $r = $in | ConvertFrom-Dotenv -InitialEnv (@{})
+            $r | Should -MatchHashtable (@{
+                A='\'
+                B="1"
+                C='\\'
+                D="2"
+                E="3"
+            }) -Because "<$in>"
+
+        }
+    }
+
 }
 
 
