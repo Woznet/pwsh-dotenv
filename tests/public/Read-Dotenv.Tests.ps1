@@ -119,11 +119,11 @@ InModuleScope "pwsh-dotenv" {
 
             $r = Read-Dotenv -AsEnvEntry
             $r | Should -MatchEnvEntry @(
-                @{Name="ABC1";Value='A1';Expand=$true}
-                @{Name="ABC2";Value='B2';Expand=$false}
-                @{Name="ABC1";Value='${ABC1}A2';Expand=$true}
-                @{Name="ABC1";Value='${ABC1}A3';Expand=$false}
-                @{Name="ABC1";Value='${ABC1}A4$ABC2';Expand=$true}
+                @{Name="ABC1";Value='A1';QuoteType=[EnumQuoteTypes]::UNQUOTED}
+                @{Name="ABC2";Value='B2';QuoteType=[EnumQuoteTypes]::SINGLE_QUOTED}
+                @{Name="ABC1";Value='${ABC1}A2';QuoteType=[EnumQuoteTypes]::DOUBLE_QUOTED}
+                @{Name="ABC1";Value='${ABC1}A3';QuoteType=[EnumQuoteTypes]::SINGLE_QUOTED}
+                @{Name="ABC1";Value='${ABC1}A4$ABC2';QuoteType=[EnumQuoteTypes]::UNQUOTED}
             ) -Because "<$(Get-Content -Raw ".env")>"
 
         }

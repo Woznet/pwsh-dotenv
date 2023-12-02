@@ -8,7 +8,7 @@ function Get-ValueInternal {
         [string]$InputObject
     )
     if ("" -eq $InputObject) {
-        return ([EnvEntry]::new("", $false), "");
+        return ([EnvEntry]::new("", [EnumQuoteTypes]::UNQUOTED), "");
     }
     $prefix = Get-QuotePrefixInternal $InputObject
     if ("" -eq $prefix) {

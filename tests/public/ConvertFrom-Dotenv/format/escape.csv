@@ -1,292 +1,870 @@
 "DESCRIPTION","INPUT","EXPECT_TYPE","EXPECT_NAME1","EXPECT_VALUE1","EXPECT_NAME2","EXPECT_VALUE2","EXPECT_NAME3","EXPECT_VALUE3","EXPECT_NAME4","EXPECT_VALUE4","EXPECT_NAME5","EXPECT_VALUE5",EXPECT_NAME6,EXPECT_VALUE6,"COMMENT",TEST
-"CR","TEST01=""Line1\rLine2\rLine3""",,"TEST01","Line1@json_decode(""\r"")Line2@json_decode(""\r"")Line3",,,,,,,,,,,,
-"LF","TEST01=""Line1\nLine2\nLine3""",,"TEST01","Line1@json_decode(""\n"")Line2@json_decode(""\n"")Line3",,,,,,,,,,,,
-"CRLF","TEST01=""Line1\r\nLine2\r\nLine3""",,"TEST01","Line1@json_decode(""\r"")@json_decode(""\n"")Line2@json_decode(""\r"")@json_decode(""\n"")Line3",,,,,,,,,,,,
-"LFCR","TEST01=""Line1\n\rLine2\n\rLine3""",,"TEST01","Line1@json_decode(""\n"")@json_decode(""\r"")Line2@json_decode(""\n"")@json_decode(""\r"")Line3",,,,,,,,,,,,
-"ASCII 0x20","TEST01=""\ ""
-TEST02=abc
-",,"TEST01","@json_decode(""\u0020"")","TEST02","abc",,,,,,,,,,
-"ASCII 0x21","TEST01=""\!""
-TEST02=abc
-",,"TEST01","!","TEST02","abc",,,,,,,,,,
-"ASCII 0x22","TEST01=""\""""
-TEST02=abc
-",,"TEST01","""","TEST02","abc",,,,,,,,,,
-"ASCII 0x23","TEST01=""\#""
-TEST02=abc
-",,"TEST01","#","TEST02","abc",,,,,,,,,,
-"ASCII 0x24","TEST01=""\$""
-TEST02=abc
-",,"TEST01","$","TEST02","abc",,,,,,,,,,
-"ASCII 0x25","TEST01=""\%""
-TEST02=abc
-",,"TEST01","%","TEST02","abc",,,,,,,,,,
-"ASCII 0x26","TEST01=""\&""
-TEST02=abc
-",,"TEST01","&","TEST02","abc",,,,,,,,,,
-"ASCII 0x27","TEST01=""\'""
-TEST02=abc
-",,"TEST01","'","TEST02","abc",,,,,,,,,,
-"ASCII 0x28","TEST01=""\(""
-TEST02=abc
-",,"TEST01","(","TEST02","abc",,,,,,,,,,
-"ASCII 0x29","TEST01=""\)""
-TEST02=abc
-",,"TEST01",")","TEST02","abc",,,,,,,,,,
-"ASCII 0x2a","TEST01=""\*""
-TEST02=abc
-",,"TEST01","*","TEST02","abc",,,,,,,,,,
-"ASCII 0x2b","TEST01=""\+""
-TEST02=abc
-",,"TEST01","+","TEST02","abc",,,,,,,,,,
-"ASCII 0x2c","TEST01=""\,""
-TEST02=abc
-",,"TEST01",",","TEST02","abc",,,,,,,,,,
-"ASCII 0x2d","TEST01=""\-""
-TEST02=abc
-",,"TEST01","-","TEST02","abc",,,,,,,,,,
-"ASCII 0x2e","TEST01=""\.""
-TEST02=abc
-",,"TEST01",".","TEST02","abc",,,,,,,,,,
-"ASCII 0x2f","TEST01=""\/""
-TEST02=abc
-",,"TEST01","/","TEST02","abc",,,,,,,,,,
-"ASCII 0x30","TEST01=""\0""
-TEST02=abc
-",,"TEST01","0","TEST02","abc",,,,,,,,,,
-"ASCII 0x31","TEST01=""\1""
-TEST02=abc
-",,"TEST01","1","TEST02","abc",,,,,,,,,,
-"ASCII 0x32","TEST01=""\2""
-TEST02=abc
-",,"TEST01","2","TEST02","abc",,,,,,,,,,
-"ASCII 0x33","TEST01=""\3""
-TEST02=abc
-",,"TEST01","3","TEST02","abc",,,,,,,,,,
-"ASCII 0x34","TEST01=""\4""
-TEST02=abc
-",,"TEST01","4","TEST02","abc",,,,,,,,,,
-"ASCII 0x35","TEST01=""\5""
-TEST02=abc
-",,"TEST01","5","TEST02","abc",,,,,,,,,,
-"ASCII 0x36","TEST01=""\6""
-TEST02=abc
-",,"TEST01","6","TEST02","abc",,,,,,,,,,
-"ASCII 0x37","TEST01=""\7""
-TEST02=abc
-",,"TEST01","7","TEST02","abc",,,,,,,,,,
-"ASCII 0x38","TEST01=""\8""
-TEST02=abc
-",,"TEST01","8","TEST02","abc",,,,,,,,,,
-"ASCII 0x39","TEST01=""\9""
-TEST02=abc
-",,"TEST01","9","TEST02","abc",,,,,,,,,,
-"ASCII 0x3a","TEST01=""\:""
-TEST02=abc
-",,"TEST01",":","TEST02","abc",,,,,,,,,,
-"ASCII 0x3b","TEST01=""\;""
-TEST02=abc
-",,"TEST01",";","TEST02","abc",,,,,,,,,,
-"ASCII 0x3c","TEST01=""\<""
-TEST02=abc
-",,"TEST01","<","TEST02","abc",,,,,,,,,,
-"ASCII 0x3d","TEST01=""\=""
-TEST02=abc
-",,"TEST01","=","TEST02","abc",,,,,,,,,,
-"ASCII 0x3e","TEST01=""\>""
-TEST02=abc
-",,"TEST01",">","TEST02","abc",,,,,,,,,,
-"ASCII 0x3f","TEST01=""\?""
-TEST02=abc
-",,"TEST01","?","TEST02","abc",,,,,,,,,,
-"ASCII 0x40","TEST01=""\@""
-TEST02=abc
-",,"TEST01","@","TEST02","abc",,,,,,,,,,
-"ASCII 0x41","TEST01=""\A""
-TEST02=abc
-",,"TEST01","A","TEST02","abc",,,,,,,,,,
-"ASCII 0x42","TEST01=""\B""
-TEST02=abc
-",,"TEST01","B","TEST02","abc",,,,,,,,,,
-"ASCII 0x43","TEST01=""\C""
-TEST02=abc
-",,"TEST01","C","TEST02","abc",,,,,,,,,,
-"ASCII 0x44","TEST01=""\D""
-TEST02=abc
-",,"TEST01","D","TEST02","abc",,,,,,,,,,
-"ASCII 0x45","TEST01=""\E""
-TEST02=abc
-",,"TEST01","E","TEST02","abc",,,,,,,,,,
-"ASCII 0x46","TEST01=""\F""
-TEST02=abc
-",,"TEST01","F","TEST02","abc",,,,,,,,,,
-"ASCII 0x47","TEST01=""\G""
-TEST02=abc
-",,"TEST01","G","TEST02","abc",,,,,,,,,,
-"ASCII 0x48","TEST01=""\H""
-TEST02=abc
-",,"TEST01","H","TEST02","abc",,,,,,,,,,
-"ASCII 0x49","TEST01=""\I""
-TEST02=abc
-",,"TEST01","I","TEST02","abc",,,,,,,,,,
-"ASCII 0x4a","TEST01=""\J""
-TEST02=abc
-",,"TEST01","J","TEST02","abc",,,,,,,,,,
-"ASCII 0x4b","TEST01=""\K""
-TEST02=abc
-",,"TEST01","K","TEST02","abc",,,,,,,,,,
-"ASCII 0x4c","TEST01=""\L""
-TEST02=abc
-",,"TEST01","L","TEST02","abc",,,,,,,,,,
-"ASCII 0x4d","TEST01=""\M""
-TEST02=abc
-",,"TEST01","M","TEST02","abc",,,,,,,,,,
-"ASCII 0x4e","TEST01=""\N""
-TEST02=abc
-",,"TEST01","N","TEST02","abc",,,,,,,,,,
-"ASCII 0x4f","TEST01=""\O""
-TEST02=abc
-",,"TEST01","O","TEST02","abc",,,,,,,,,,
-"ASCII 0x50","TEST01=""\P""
-TEST02=abc
-",,"TEST01","P","TEST02","abc",,,,,,,,,,
-"ASCII 0x51","TEST01=""\Q""
-TEST02=abc
-",,"TEST01","Q","TEST02","abc",,,,,,,,,,
-"ASCII 0x52","TEST01=""\R""
-TEST02=abc
-",,"TEST01","R","TEST02","abc",,,,,,,,,,
-"ASCII 0x53","TEST01=""\S""
-TEST02=abc
-",,"TEST01","S","TEST02","abc",,,,,,,,,,
-"ASCII 0x54","TEST01=""\T""
-TEST02=abc
-",,"TEST01","T","TEST02","abc",,,,,,,,,,
-"ASCII 0x55","TEST01=""\U""
-TEST02=abc
-",,"TEST01","U","TEST02","abc",,,,,,,,,,
-"ASCII 0x56","TEST01=""\V""
-TEST02=abc
-",,"TEST01","V","TEST02","abc",,,,,,,,,,
-"ASCII 0x57","TEST01=""\W""
-TEST02=abc
-",,"TEST01","W","TEST02","abc",,,,,,,,,,
-"ASCII 0x58","TEST01=""\X""
-TEST02=abc
-",,"TEST01","X","TEST02","abc",,,,,,,,,,
-"ASCII 0x59","TEST01=""\Y""
-TEST02=abc
-",,"TEST01","Y","TEST02","abc",,,,,,,,,,
-"ASCII 0x5a","TEST01=""\Z""
-TEST02=abc
-",,"TEST01","Z","TEST02","abc",,,,,,,,,,
-"ASCII 0x5b","TEST01=""\[""
-TEST02=abc
-",,"TEST01","[","TEST02","abc",,,,,,,,,,
-"ASCII 0x5c","TEST01=""\\""
+"UNQUOTED CR","TEST01=""Line1\rLine2\rLine3""",,"TEST01","Line1@json_decode(""\r"")Line2@json_decode(""\r"")Line3",,,,,,,,,,,,
+"UNQUOTED LF","TEST01=""Line1\nLine2\nLine3""",,"TEST01","Line1@json_decode(""\n"")Line2@json_decode(""\n"")Line3",,,,,,,,,,,,
+"UNQUOTED CRLF","TEST01=""Line1\r\nLine2\r\nLine3""",,"TEST01","Line1@json_decode(""\r"")@json_decode(""\n"")Line2@json_decode(""\r"")@json_decode(""\n"")Line3",,,,,,,,,,,,
+"UNQUOTED LFCR","TEST01=""Line1\n\rLine2\n\rLine3""",,"TEST01","Line1@json_decode(""\n"")@json_decode(""\r"")Line2@json_decode(""\n"")@json_decode(""\r"")Line3",,,,,,,,,,,,
+"UNQUOTED ASCII 0x20","TEST01=\ 
 TEST02=abc
 ",,"TEST01","\","TEST02","abc",,,,,,,,,,
-"ASCII 0x5d","TEST01=""\]""
+"UNQUOTED ASCII 0x21","TEST01=\!
+TEST02=abc
+",,"TEST01","!","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x22","TEST01=\""
+TEST02=abc
+",,"TEST01","""","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x23","TEST01=\#
+TEST02=abc
+",,"TEST01","\","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x24","TEST01=\$
+TEST02=abc
+",,"TEST01","$","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x25","TEST01=\%
+TEST02=abc
+",,"TEST01","%","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x26","TEST01=\&
+TEST02=abc
+",,"TEST01","&","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x27","TEST01=\'
+TEST02=abc
+",,"TEST01","'","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x28","TEST01=\(
+TEST02=abc
+",,"TEST01","(","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x29","TEST01=\)
+TEST02=abc
+",,"TEST01",")","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x2a","TEST01=\*
+TEST02=abc
+",,"TEST01","*","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x2b","TEST01=\+
+TEST02=abc
+",,"TEST01","+","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x2c","TEST01=\,
+TEST02=abc
+",,"TEST01",",","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x2d","TEST01=\-
+TEST02=abc
+",,"TEST01","-","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x2e","TEST01=\.
+TEST02=abc
+",,"TEST01",".","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x2f","TEST01=\/
+TEST02=abc
+",,"TEST01","/","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x30","TEST01=\0
+TEST02=abc
+",,"TEST01","0","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x31","TEST01=\1
+TEST02=abc
+",,"TEST01","1","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x32","TEST01=\2
+TEST02=abc
+",,"TEST01","2","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x33","TEST01=\3
+TEST02=abc
+",,"TEST01","3","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x34","TEST01=\4
+TEST02=abc
+",,"TEST01","4","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x35","TEST01=\5
+TEST02=abc
+",,"TEST01","5","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x36","TEST01=\6
+TEST02=abc
+",,"TEST01","6","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x37","TEST01=\7
+TEST02=abc
+",,"TEST01","7","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x38","TEST01=\8
+TEST02=abc
+",,"TEST01","8","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x39","TEST01=\9
+TEST02=abc
+",,"TEST01","9","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x3a","TEST01=\:
+TEST02=abc
+",,"TEST01",":","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x3b","TEST01=\;
+TEST02=abc
+",,"TEST01",";","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x3c","TEST01=\<
+TEST02=abc
+",,"TEST01","<","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x3d","TEST01=\=
+TEST02=abc
+",,"TEST01","=","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x3e","TEST01=\>
+TEST02=abc
+",,"TEST01",">","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x3f","TEST01=\?
+TEST02=abc
+",,"TEST01","?","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x40","TEST01=\@
+TEST02=abc
+",,"TEST01","@","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x41","TEST01=\A
+TEST02=abc
+",,"TEST01","A","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x42","TEST01=\B
+TEST02=abc
+",,"TEST01","B","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x43","TEST01=\C
+TEST02=abc
+",,"TEST01","C","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x44","TEST01=\D
+TEST02=abc
+",,"TEST01","D","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x45","TEST01=\E
+TEST02=abc
+",,"TEST01","E","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x46","TEST01=\F
+TEST02=abc
+",,"TEST01","F","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x47","TEST01=\G
+TEST02=abc
+",,"TEST01","G","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x48","TEST01=\H
+TEST02=abc
+",,"TEST01","H","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x49","TEST01=\I
+TEST02=abc
+",,"TEST01","I","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x4a","TEST01=\J
+TEST02=abc
+",,"TEST01","J","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x4b","TEST01=\K
+TEST02=abc
+",,"TEST01","K","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x4c","TEST01=\L
+TEST02=abc
+",,"TEST01","L","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x4d","TEST01=\M
+TEST02=abc
+",,"TEST01","M","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x4e","TEST01=\N
+TEST02=abc
+",,"TEST01","N","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x4f","TEST01=\O
+TEST02=abc
+",,"TEST01","O","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x50","TEST01=\P
+TEST02=abc
+",,"TEST01","P","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x51","TEST01=\Q
+TEST02=abc
+",,"TEST01","Q","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x52","TEST01=\R
+TEST02=abc
+",,"TEST01","R","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x53","TEST01=\S
+TEST02=abc
+",,"TEST01","S","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x54","TEST01=\T
+TEST02=abc
+",,"TEST01","T","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x55","TEST01=\U
+TEST02=abc
+",,"TEST01","U","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x56","TEST01=\V
+TEST02=abc
+",,"TEST01","V","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x57","TEST01=\W
+TEST02=abc
+",,"TEST01","W","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x58","TEST01=\X
+TEST02=abc
+",,"TEST01","X","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x59","TEST01=\Y
+TEST02=abc
+",,"TEST01","Y","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x5a","TEST01=\Z
+TEST02=abc
+",,"TEST01","Z","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x5b","TEST01=\[
+TEST02=abc
+",,"TEST01","[","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x5c","TEST01=\\
+TEST02=abc
+",,"TEST01","\","TEST02","abc",,,,,,,,,,
+"UNQUOTED ASCII 0x5d","TEST01=\]
 TEST02=abc
 ",,"TEST01","]","TEST02","abc",,,,,,,,,,
-"ASCII 0x5e","TEST01=""\^""
+"UNQUOTED ASCII 0x5e","TEST01=\^
 TEST02=abc
 ",,"TEST01","^","TEST02","abc",,,,,,,,,,
-"ASCII 0x5f","TEST01=""\_""
+"UNQUOTED ASCII 0x5f","TEST01=\_
 TEST02=abc
 ",,"TEST01","_","TEST02","abc",,,,,,,,,,
-"ASCII 0x60","TEST01=""\`""
+"UNQUOTED ASCII 0x60","TEST01=\`
 TEST02=abc
 ",,"TEST01","`","TEST02","abc",,,,,,,,,,
-"ASCII 0x61","TEST01=""\a""
+"UNQUOTED ASCII 0x61","TEST01=\a
 TEST02=abc
 ",,"TEST01","a","TEST02","abc",,,,,,,,,,
-"ASCII 0x62","TEST01=""\b""
+"UNQUOTED ASCII 0x62","TEST01=\b
 TEST02=abc
 ",,"TEST01","b","TEST02","abc",,,,,,,,,,
-"ASCII 0x63","TEST01=""\c""
+"UNQUOTED ASCII 0x63","TEST01=\c
 TEST02=abc
 ",,"TEST01","c","TEST02","abc",,,,,,,,,,
-"ASCII 0x64","TEST01=""\d""
+"UNQUOTED ASCII 0x64","TEST01=\d
 TEST02=abc
 ",,"TEST01","d","TEST02","abc",,,,,,,,,,
-"ASCII 0x65","TEST01=""\e""
+"UNQUOTED ASCII 0x65","TEST01=\e
 TEST02=abc
 ",,"TEST01","e","TEST02","abc",,,,,,,,,,
-"ASCII 0x66","TEST01=""\f""
+"UNQUOTED ASCII 0x66","TEST01=\f
 TEST02=abc
 ",,"TEST01","f","TEST02","abc",,,,,,,,,,
-"ASCII 0x67","TEST01=""\g""
+"UNQUOTED ASCII 0x67","TEST01=\g
 TEST02=abc
 ",,"TEST01","g","TEST02","abc",,,,,,,,,,
-"ASCII 0x68","TEST01=""\h""
+"UNQUOTED ASCII 0x68","TEST01=\h
 TEST02=abc
 ",,"TEST01","h","TEST02","abc",,,,,,,,,,
-"ASCII 0x69","TEST01=""\i""
+"UNQUOTED ASCII 0x69","TEST01=\i
 TEST02=abc
 ",,"TEST01","i","TEST02","abc",,,,,,,,,,
-"ASCII 0x6a","TEST01=""\j""
+"UNQUOTED ASCII 0x6a","TEST01=\j
 TEST02=abc
 ",,"TEST01","j","TEST02","abc",,,,,,,,,,
-"ASCII 0x6b","TEST01=""\k""
+"UNQUOTED ASCII 0x6b","TEST01=\k
 TEST02=abc
 ",,"TEST01","k","TEST02","abc",,,,,,,,,,
-"ASCII 0x6c","TEST01=""\l""
+"UNQUOTED ASCII 0x6c","TEST01=\l
 TEST02=abc
 ",,"TEST01","l","TEST02","abc",,,,,,,,,,
-"ASCII 0x6d","TEST01=""\m""
+"UNQUOTED ASCII 0x6d","TEST01=\m
 TEST02=abc
 ",,"TEST01","m","TEST02","abc",,,,,,,,,,
-"ASCII 0x6e","TEST01=""\n""
+"UNQUOTED ASCII 0x6e","TEST01=\n
 TEST02=abc
 ",,"TEST01","@json_decode(""\n"")","TEST02","abc",,,,,,,,,,
-"ASCII 0x6f","TEST01=""\o""
+"UNQUOTED ASCII 0x6f","TEST01=\o
 TEST02=abc
 ",,"TEST01","o","TEST02","abc",,,,,,,,,,
-"ASCII 0x70","TEST01=""\p""
+"UNQUOTED ASCII 0x70","TEST01=\p
 TEST02=abc
 ",,"TEST01","p","TEST02","abc",,,,,,,,,,
-"ASCII 0x71","TEST01=""\q""
+"UNQUOTED ASCII 0x71","TEST01=\q
 TEST02=abc
 ",,"TEST01","q","TEST02","abc",,,,,,,,,,
-"ASCII 0x72","TEST01=""\r""
+"UNQUOTED ASCII 0x72","TEST01=\r
 TEST02=abc
 ",,"TEST01","@json_decode(""\r"")","TEST02","abc",,,,,,,,,,
-"ASCII 0x73","TEST01=""\s""
+"UNQUOTED ASCII 0x73","TEST01=\s
 TEST02=abc
 ",,"TEST01","s","TEST02","abc",,,,,,,,,,
-"ASCII 0x74","TEST01=""\t""
+"UNQUOTED ASCII 0x74","TEST01=\t
 TEST02=abc
 ",,"TEST01","@json_decode(""\t"")","TEST02","abc",,,,,,,,,,
-"ASCII 0x75","TEST01=""\u""
+"UNQUOTED ASCII 0x75","TEST01=\u
 TEST02=abc
 ",,"TEST01","u","TEST02","abc",,,,,,,,,,
-"ASCII 0x76","TEST01=""\v""
+"UNQUOTED ASCII 0x76","TEST01=\v
 TEST02=abc
 ",,"TEST01","v","TEST02","abc",,,,,,,,,,
-"ASCII 0x77","TEST01=""\w""
+"UNQUOTED ASCII 0x77","TEST01=\w
 TEST02=abc
 ",,"TEST01","w","TEST02","abc",,,,,,,,,,
-"ASCII 0x78","TEST01=""\x""
+"UNQUOTED ASCII 0x78","TEST01=\x
 TEST02=abc
 ",,"TEST01","x","TEST02","abc",,,,,,,,,,
-"ASCII 0x79","TEST01=""\y""
+"UNQUOTED ASCII 0x79","TEST01=\y
 TEST02=abc
 ",,"TEST01","y","TEST02","abc",,,,,,,,,,
-"ASCII 0x7a","TEST01=""\z""
+"UNQUOTED ASCII 0x7a","TEST01=\z
 TEST02=abc
 ",,"TEST01","z","TEST02","abc",,,,,,,,,,
-"ASCII 0x7b","TEST01=""\{""
+"UNQUOTED ASCII 0x7b","TEST01=\{
 TEST02=abc
 ",,"TEST01","{","TEST02","abc",,,,,,,,,,
-"ASCII 0x7c","TEST01=""\|""
+"UNQUOTED ASCII 0x7c","TEST01=\|
 TEST02=abc
 ",,"TEST01","|","TEST02","abc",,,,,,,,,,
-"ASCII 0x7d","TEST01=""\}""
+"UNQUOTED ASCII 0x7d","TEST01=\}
 TEST02=abc
 ",,"TEST01","}","TEST02","abc",,,,,,,,,,
-"ASCII 0x7e","TEST01=""\~""
+"UNQUOTED ASCII 0x7e","TEST01=\~
 TEST02=abc
 ",,"TEST01","~","TEST02","abc",,,,,,,,,,
 ,,,,,,,,,,,,,,,,
+"DOUBLE QUOTED CR","TEST01=""Line1\rLine2\rLine3""",,"TEST01","Line1@json_decode(""\r"")Line2@json_decode(""\r"")Line3",,,,,,,,,,,,
+"DOUBLE QUOTED LF","TEST01=""Line1\nLine2\nLine3""",,"TEST01","Line1@json_decode(""\n"")Line2@json_decode(""\n"")Line3",,,,,,,,,,,,
+"DOUBLE QUOTED CRLF","TEST01=""Line1\r\nLine2\r\nLine3""",,"TEST01","Line1@json_decode(""\r"")@json_decode(""\n"")Line2@json_decode(""\r"")@json_decode(""\n"")Line3",,,,,,,,,,,,
+"DOUBLE QUOTED LFCR","TEST01=""Line1\n\rLine2\n\rLine3""",,"TEST01","Line1@json_decode(""\n"")@json_decode(""\r"")Line2@json_decode(""\n"")@json_decode(""\r"")Line3",,,,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x20","TEST01=""\ ""
+TEST02=abc
+",,"TEST01","@json_decode(""\u0020"")","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x21","TEST01=""\!""
+TEST02=abc
+",,"TEST01","!","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x22","TEST01=""\""""
+TEST02=abc
+",,"TEST01","""","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x23","TEST01=""\#""
+TEST02=abc
+",,"TEST01","#","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x24","TEST01=""\$""
+TEST02=abc
+",,"TEST01","$","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x25","TEST01=""\%""
+TEST02=abc
+",,"TEST01","%","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x26","TEST01=""\&""
+TEST02=abc
+",,"TEST01","&","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x27","TEST01=""\'""
+TEST02=abc
+",,"TEST01","'","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x28","TEST01=""\(""
+TEST02=abc
+",,"TEST01","(","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x29","TEST01=""\)""
+TEST02=abc
+",,"TEST01",")","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x2a","TEST01=""\*""
+TEST02=abc
+",,"TEST01","*","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x2b","TEST01=""\+""
+TEST02=abc
+",,"TEST01","+","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x2c","TEST01=""\,""
+TEST02=abc
+",,"TEST01",",","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x2d","TEST01=""\-""
+TEST02=abc
+",,"TEST01","-","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x2e","TEST01=""\.""
+TEST02=abc
+",,"TEST01",".","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x2f","TEST01=""\/""
+TEST02=abc
+",,"TEST01","/","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x30","TEST01=""\0""
+TEST02=abc
+",,"TEST01","0","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x31","TEST01=""\1""
+TEST02=abc
+",,"TEST01","1","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x32","TEST01=""\2""
+TEST02=abc
+",,"TEST01","2","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x33","TEST01=""\3""
+TEST02=abc
+",,"TEST01","3","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x34","TEST01=""\4""
+TEST02=abc
+",,"TEST01","4","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x35","TEST01=""\5""
+TEST02=abc
+",,"TEST01","5","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x36","TEST01=""\6""
+TEST02=abc
+",,"TEST01","6","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x37","TEST01=""\7""
+TEST02=abc
+",,"TEST01","7","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x38","TEST01=""\8""
+TEST02=abc
+",,"TEST01","8","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x39","TEST01=""\9""
+TEST02=abc
+",,"TEST01","9","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x3a","TEST01=""\:""
+TEST02=abc
+",,"TEST01",":","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x3b","TEST01=""\;""
+TEST02=abc
+",,"TEST01",";","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x3c","TEST01=""\<""
+TEST02=abc
+",,"TEST01","<","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x3d","TEST01=""\=""
+TEST02=abc
+",,"TEST01","=","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x3e","TEST01=""\>""
+TEST02=abc
+",,"TEST01",">","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x3f","TEST01=""\?""
+TEST02=abc
+",,"TEST01","?","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x40","TEST01=""\@""
+TEST02=abc
+",,"TEST01","@","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x41","TEST01=""\A""
+TEST02=abc
+",,"TEST01","A","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x42","TEST01=""\B""
+TEST02=abc
+",,"TEST01","B","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x43","TEST01=""\C""
+TEST02=abc
+",,"TEST01","C","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x44","TEST01=""\D""
+TEST02=abc
+",,"TEST01","D","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x45","TEST01=""\E""
+TEST02=abc
+",,"TEST01","E","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x46","TEST01=""\F""
+TEST02=abc
+",,"TEST01","F","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x47","TEST01=""\G""
+TEST02=abc
+",,"TEST01","G","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x48","TEST01=""\H""
+TEST02=abc
+",,"TEST01","H","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x49","TEST01=""\I""
+TEST02=abc
+",,"TEST01","I","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x4a","TEST01=""\J""
+TEST02=abc
+",,"TEST01","J","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x4b","TEST01=""\K""
+TEST02=abc
+",,"TEST01","K","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x4c","TEST01=""\L""
+TEST02=abc
+",,"TEST01","L","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x4d","TEST01=""\M""
+TEST02=abc
+",,"TEST01","M","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x4e","TEST01=""\N""
+TEST02=abc
+",,"TEST01","N","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x4f","TEST01=""\O""
+TEST02=abc
+",,"TEST01","O","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x50","TEST01=""\P""
+TEST02=abc
+",,"TEST01","P","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x51","TEST01=""\Q""
+TEST02=abc
+",,"TEST01","Q","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x52","TEST01=""\R""
+TEST02=abc
+",,"TEST01","R","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x53","TEST01=""\S""
+TEST02=abc
+",,"TEST01","S","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x54","TEST01=""\T""
+TEST02=abc
+",,"TEST01","T","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x55","TEST01=""\U""
+TEST02=abc
+",,"TEST01","U","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x56","TEST01=""\V""
+TEST02=abc
+",,"TEST01","V","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x57","TEST01=""\W""
+TEST02=abc
+",,"TEST01","W","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x58","TEST01=""\X""
+TEST02=abc
+",,"TEST01","X","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x59","TEST01=""\Y""
+TEST02=abc
+",,"TEST01","Y","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x5a","TEST01=""\Z""
+TEST02=abc
+",,"TEST01","Z","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x5b","TEST01=""\[""
+TEST02=abc
+",,"TEST01","[","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x5c","TEST01=""\\""
+TEST02=abc
+",,"TEST01","\","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x5d","TEST01=""\]""
+TEST02=abc
+",,"TEST01","]","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x5e","TEST01=""\^""
+TEST02=abc
+",,"TEST01","^","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x5f","TEST01=""\_""
+TEST02=abc
+",,"TEST01","_","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x60","TEST01=""\`""
+TEST02=abc
+",,"TEST01","`","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x61","TEST01=""\a""
+TEST02=abc
+",,"TEST01","a","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x62","TEST01=""\b""
+TEST02=abc
+",,"TEST01","b","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x63","TEST01=""\c""
+TEST02=abc
+",,"TEST01","c","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x64","TEST01=""\d""
+TEST02=abc
+",,"TEST01","d","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x65","TEST01=""\e""
+TEST02=abc
+",,"TEST01","e","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x66","TEST01=""\f""
+TEST02=abc
+",,"TEST01","f","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x67","TEST01=""\g""
+TEST02=abc
+",,"TEST01","g","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x68","TEST01=""\h""
+TEST02=abc
+",,"TEST01","h","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x69","TEST01=""\i""
+TEST02=abc
+",,"TEST01","i","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x6a","TEST01=""\j""
+TEST02=abc
+",,"TEST01","j","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x6b","TEST01=""\k""
+TEST02=abc
+",,"TEST01","k","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x6c","TEST01=""\l""
+TEST02=abc
+",,"TEST01","l","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x6d","TEST01=""\m""
+TEST02=abc
+",,"TEST01","m","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x6e","TEST01=""\n""
+TEST02=abc
+",,"TEST01","@json_decode(""\n"")","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x6f","TEST01=""\o""
+TEST02=abc
+",,"TEST01","o","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x70","TEST01=""\p""
+TEST02=abc
+",,"TEST01","p","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x71","TEST01=""\q""
+TEST02=abc
+",,"TEST01","q","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x72","TEST01=""\r""
+TEST02=abc
+",,"TEST01","@json_decode(""\r"")","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x73","TEST01=""\s""
+TEST02=abc
+",,"TEST01","s","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x74","TEST01=""\t""
+TEST02=abc
+",,"TEST01","@json_decode(""\t"")","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x75","TEST01=""\u""
+TEST02=abc
+",,"TEST01","u","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x76","TEST01=""\v""
+TEST02=abc
+",,"TEST01","v","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x77","TEST01=""\w""
+TEST02=abc
+",,"TEST01","w","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x78","TEST01=""\x""
+TEST02=abc
+",,"TEST01","x","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x79","TEST01=""\y""
+TEST02=abc
+",,"TEST01","y","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x7a","TEST01=""\z""
+TEST02=abc
+",,"TEST01","z","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x7b","TEST01=""\{""
+TEST02=abc
+",,"TEST01","{","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x7c","TEST01=""\|""
+TEST02=abc
+",,"TEST01","|","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x7d","TEST01=""\}""
+TEST02=abc
+",,"TEST01","}","TEST02","abc",,,,,,,,,,
+"DOUBLE QUOTED ASCII 0x7e","TEST01=""\~""
+TEST02=abc
+",,"TEST01","~","TEST02","abc",,,,,,,,,,
 ,,,,,,,,,,,,,,,,
+"SINGLE QUOTED CR","TEST01=""Line1\rLine2\rLine3""",,"TEST01","Line1@json_decode(""\r"")Line2@json_decode(""\r"")Line3",,,,,,,,,,,,
+"SINGLE QUOTED LF","TEST01=""Line1\nLine2\nLine3""",,"TEST01","Line1@json_decode(""\n"")Line2@json_decode(""\n"")Line3",,,,,,,,,,,,
+"SINGLE QUOTED CRLF","TEST01=""Line1\r\nLine2\r\nLine3""",,"TEST01","Line1@json_decode(""\r"")@json_decode(""\n"")Line2@json_decode(""\r"")@json_decode(""\n"")Line3",,,,,,,,,,,,
+"SINGLE QUOTED LFCR","TEST01=""Line1\n\rLine2\n\rLine3""",,"TEST01","Line1@json_decode(""\n"")@json_decode(""\r"")Line2@json_decode(""\n"")@json_decode(""\r"")Line3",,,,,,,,,,,,
+"SINGLE QUOTED ASCII 0x20","TEST01='\ '
+TEST02=abc
+",,"TEST01","\@json_decode(""\u0020"")","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x21","TEST01='\!'
+TEST02=abc
+",,"TEST01","\!","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x22","TEST01='\""'
+TEST02=abc
+",,"TEST01","\""","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x23","TEST01='\#'
+TEST02=abc
+",,"TEST01","\#","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x24","TEST01='\$'
+TEST02=abc
+",,"TEST01","\$","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x25","TEST01='\%'
+TEST02=abc
+",,"TEST01","\%","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x26","TEST01='\&'
+TEST02=abc
+",,"TEST01","\&","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x27","TEST01='\''
+TEST02=abc
+",,"TEST01","'","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x28","TEST01='\('
+TEST02=abc
+",,"TEST01","\(","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x29","TEST01='\)'
+TEST02=abc
+",,"TEST01","\)","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x2a","TEST01='\*'
+TEST02=abc
+",,"TEST01","\*","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x2b","TEST01='\+'
+TEST02=abc
+",,"TEST01","\+","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x2c","TEST01='\,'
+TEST02=abc
+",,"TEST01","\,","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x2d","TEST01='\-'
+TEST02=abc
+",,"TEST01","\-","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x2e","TEST01='\.'
+TEST02=abc
+",,"TEST01","\.","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x2f","TEST01='\/'
+TEST02=abc
+",,"TEST01","\/","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x30","TEST01='\0'
+TEST02=abc
+",,"TEST01","\0","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x31","TEST01='\1'
+TEST02=abc
+",,"TEST01","\1","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x32","TEST01='\2'
+TEST02=abc
+",,"TEST01","\2","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x33","TEST01='\3'
+TEST02=abc
+",,"TEST01","\3","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x34","TEST01='\4'
+TEST02=abc
+",,"TEST01","\4","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x35","TEST01='\5'
+TEST02=abc
+",,"TEST01","\5","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x36","TEST01='\6'
+TEST02=abc
+",,"TEST01","\6","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x37","TEST01='\7'
+TEST02=abc
+",,"TEST01","\7","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x38","TEST01='\8'
+TEST02=abc
+",,"TEST01","\8","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x39","TEST01='\9'
+TEST02=abc
+",,"TEST01","\9","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x3a","TEST01='\:'
+TEST02=abc
+",,"TEST01","\:","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x3b","TEST01='\;'
+TEST02=abc
+",,"TEST01","\;","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x3c","TEST01='\<'
+TEST02=abc
+",,"TEST01","\<","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x3d","TEST01='\='
+TEST02=abc
+",,"TEST01","\=","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x3e","TEST01='\>'
+TEST02=abc
+",,"TEST01","\>","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x3f","TEST01='\?'
+TEST02=abc
+",,"TEST01","\?","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x40","TEST01='\@'
+TEST02=abc
+",,"TEST01","\@","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x41","TEST01='\A'
+TEST02=abc
+",,"TEST01","\A","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x42","TEST01='\B'
+TEST02=abc
+",,"TEST01","\B","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x43","TEST01='\C'
+TEST02=abc
+",,"TEST01","\C","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x44","TEST01='\D'
+TEST02=abc
+",,"TEST01","\D","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x45","TEST01='\E'
+TEST02=abc
+",,"TEST01","\E","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x46","TEST01='\F'
+TEST02=abc
+",,"TEST01","\F","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x47","TEST01='\G'
+TEST02=abc
+",,"TEST01","\G","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x48","TEST01='\H'
+TEST02=abc
+",,"TEST01","\H","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x49","TEST01='\I'
+TEST02=abc
+",,"TEST01","\I","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x4a","TEST01='\J'
+TEST02=abc
+",,"TEST01","\J","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x4b","TEST01='\K'
+TEST02=abc
+",,"TEST01","\K","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x4c","TEST01='\L'
+TEST02=abc
+",,"TEST01","\L","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x4d","TEST01='\M'
+TEST02=abc
+",,"TEST01","\M","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x4e","TEST01='\N'
+TEST02=abc
+",,"TEST01","\N","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x4f","TEST01='\O'
+TEST02=abc
+",,"TEST01","\O","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x50","TEST01='\P'
+TEST02=abc
+",,"TEST01","\P","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x51","TEST01='\Q'
+TEST02=abc
+",,"TEST01","\Q","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x52","TEST01='\R'
+TEST02=abc
+",,"TEST01","\R","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x53","TEST01='\S'
+TEST02=abc
+",,"TEST01","\S","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x54","TEST01='\T'
+TEST02=abc
+",,"TEST01","\T","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x55","TEST01='\U'
+TEST02=abc
+",,"TEST01","\U","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x56","TEST01='\V'
+TEST02=abc
+",,"TEST01","\V","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x57","TEST01='\W'
+TEST02=abc
+",,"TEST01","\W","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x58","TEST01='\X'
+TEST02=abc
+",,"TEST01","\X","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x59","TEST01='\Y'
+TEST02=abc
+",,"TEST01","\Y","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x5a","TEST01='\Z'
+TEST02=abc
+",,"TEST01","\Z","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x5b","TEST01='\['
+TEST02=abc
+",,"TEST01","\[","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x5c","TEST01='\\'
+TEST02=abc
+",,"TEST01","\","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x5d","TEST01='\]'
+TEST02=abc
+",,"TEST01","\]","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x5e","TEST01='\^'
+TEST02=abc
+",,"TEST01","\^","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x5f","TEST01='\_'
+TEST02=abc
+",,"TEST01","\_","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x60","TEST01='\`'
+TEST02=abc
+",,"TEST01","\`","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x61","TEST01='\a'
+TEST02=abc
+",,"TEST01","\a","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x62","TEST01='\b'
+TEST02=abc
+",,"TEST01","\b","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x63","TEST01='\c'
+TEST02=abc
+",,"TEST01","\c","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x64","TEST01='\d'
+TEST02=abc
+",,"TEST01","\d","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x65","TEST01='\e'
+TEST02=abc
+",,"TEST01","\e","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x66","TEST01='\f'
+TEST02=abc
+",,"TEST01","\f","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x67","TEST01='\g'
+TEST02=abc
+",,"TEST01","\g","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x68","TEST01='\h'
+TEST02=abc
+",,"TEST01","\h","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x69","TEST01='\i'
+TEST02=abc
+",,"TEST01","\i","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x6a","TEST01='\j'
+TEST02=abc
+",,"TEST01","\j","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x6b","TEST01='\k'
+TEST02=abc
+",,"TEST01","\k","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x6c","TEST01='\l'
+TEST02=abc
+",,"TEST01","\l","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x6d","TEST01='\m'
+TEST02=abc
+",,"TEST01","\m","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x6e","TEST01='\n'
+TEST02=abc
+",,"TEST01","\n","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x6f","TEST01='\o'
+TEST02=abc
+",,"TEST01","\o","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x70","TEST01='\p'
+TEST02=abc
+",,"TEST01","\p","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x71","TEST01='\q'
+TEST02=abc
+",,"TEST01","\q","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x72","TEST01='\r'
+TEST02=abc
+",,"TEST01","\r","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x73","TEST01='\s'
+TEST02=abc
+",,"TEST01","\s","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x74","TEST01='\t'
+TEST02=abc
+",,"TEST01","\t","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x75","TEST01='\u'
+TEST02=abc
+",,"TEST01","\u","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x76","TEST01='\v'
+TEST02=abc
+",,"TEST01","\v","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x77","TEST01='\w'
+TEST02=abc
+",,"TEST01","\w","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x78","TEST01='\x'
+TEST02=abc
+",,"TEST01","\x","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x79","TEST01='\y'
+TEST02=abc
+",,"TEST01","\y","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x7a","TEST01='\z'
+TEST02=abc
+",,"TEST01","\z","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x7b","TEST01='\{'
+TEST02=abc
+",,"TEST01","\{","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x7c","TEST01='\|'
+TEST02=abc
+",,"TEST01","\|","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x7d","TEST01='\}'
+TEST02=abc
+",,"TEST01","\}","TEST02","abc",,,,,,,,,,
+"SINGLE QUOTED ASCII 0x7e","TEST01='\~'
+TEST02=abc
+",,"TEST01","\~","TEST02","abc",,,,,,,,,,

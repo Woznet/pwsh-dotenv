@@ -14,7 +14,7 @@ function Get-SimpleValueInternal {
     $value = ($value -split "#", 2)[0].Trim()
     # $value = ($value -split "[ \t\f\v]+#", 2)[0].Trim()
 
-    $env_entry = [EnvEntry]::new($value, $true)
+    $env_entry = [EnvEntry]::new($value, [EnumQuoteTypes]::UNQUOTED)
 
     return ($env_entry, $tail);
 }

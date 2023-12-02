@@ -86,12 +86,12 @@ InModuleScope "pwsh-dotenv" {
             $r = $in | ConvertFrom-Dotenv -AsEnvEntry
 
             $r | Should -MatchEnvEntry @(
-                @{Name="ABC1";Value='$PWD';Expand=$true}
-                @{Name="ABC2";Value='$PWD';Expand=$true}
-                @{Name="ABC3";Value='$PWD';Expand=$false}
-                @{Name="Test001";Value='sample1';Expand=$true}
-                @{Name="Test001";Value='sample2';Expand=$true}
-                @{Name="Test001";Value='sample3';Expand=$false}
+                @{Name="ABC1";Value='$PWD';QuoteType=[EnumQuoteTypes]::UNQUOTED}
+                @{Name="ABC2";Value='$PWD';QuoteType=[EnumQuoteTypes]::DOUBLE_QUOTED}
+                @{Name="ABC3";Value='$PWD';QuoteType=[EnumQuoteTypes]::SINGLE_QUOTED}
+                @{Name="Test001";Value='sample1';QuoteType=[EnumQuoteTypes]::UNQUOTED}
+                @{Name="Test001";Value='sample2';QuoteType=[EnumQuoteTypes]::DOUBLE_QUOTED}
+                @{Name="Test001";Value='sample3';QuoteType=[EnumQuoteTypes]::SINGLE_QUOTED}
             ) -Because "<$($in)>"
 
         }
@@ -120,7 +120,7 @@ InModuleScope "pwsh-dotenv" {
 
         It "$(Split-Path -Leaf $_.path)" -ForEach (Import-TestCSV $_.path) {
             $r = $_.INPUT | ConvertFrom-Dotenv -InitialEnv ($_.INIT_ENV) -AllowClobber
-            $r | Should -MatchHashtable $_.EXPECT -Because "<$($_.ORG_INPUT)>"
+            $r | Should -MatchHashtable $_.EXPECT -Because "$($_.DESCRIPTION):<$($_.ORG_INPUT)>"
         }
 
     }

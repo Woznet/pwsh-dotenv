@@ -55,9 +55,40 @@ E=3
             $r | Should -MatchHashtable (@{
                 A='\'
                 B="1"
-                C='\\'
+                C='\'
                 D="2"
                 E="3"
+            }) -Because "<$in>"
+
+        }
+    }
+
+    Describe "ConvertFrom-Dotenv issue #3" {
+
+        It "Single Quotation Escape Handling" {
+
+
+            $in = @'
+A='\"'
+B='\$'
+C='\''
+D='\\'
+E='\n'
+F='\r'
+G='\t'
+H=sample 
+'@
+
+            $r = $in | ConvertFrom-Dotenv -InitialEnv (@{})
+            $r | Should -MatchHashtable (@{
+                A='\"'
+                B='\$'
+                C=''''
+                D='\'
+                E='\n'
+                F='\r'
+                G='\t'
+                H='sample'
             }) -Because "<$in>"
 
         }
