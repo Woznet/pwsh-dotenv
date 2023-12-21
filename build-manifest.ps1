@@ -1,6 +1,6 @@
 $ErrorActionPreference = 'Stop'
 
-$ModuleVersion = '1.0.2'
+$ModuleVersion = '1.0.3'
 
 $module_root = Join-Path $PSScriptRoot "pwsh-dotenv"
 $manifest_path = Join-Path $module_root pwsh-dotenv.psd1
