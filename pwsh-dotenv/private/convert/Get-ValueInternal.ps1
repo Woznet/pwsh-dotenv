@@ -7,14 +7,17 @@ function Get-ValueInternal {
     Param (
         [string]$InputObject
     )
-    if ("" -eq $InputObject) {
+
+    $str = Remove-SpaceInternal -InputObject $InputObject -TrimStart
+
+    if ("" -eq $str) {
         return ([EnvEntry]::new("", [EnumQuoteTypes]::UNQUOTED), "");
     }
-    $prefix = Get-QuotePrefixInternal $InputObject
+    $prefix = Get-QuotePrefixInternal $str
     if ("" -eq $prefix) {
-        return (Get-SimpleValueInternal $InputObject);
+        return (Get-SimpleValueInternal $str);
     }
     else {
-        return (Get-QuotedValueInternal $InputObject $prefix);
+        return (Get-QuotedValueInternal $str $prefix);
     }
 }
