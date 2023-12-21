@@ -7,7 +7,7 @@ function Get-KeyNameInternal(){
     Param (
         [string]$str
     )
-    if ($str -notmatch "${script:REG_START}(?:export${script:REG_SPACE}+)?(?<key_name>\w+)${script:REG_SPACE}*=${script:REG_SPACE}*") {
+    if ($str -notmatch "${script:REG_START}(?:export${script:REG_SPACE}+)?(?<key_name>\w+)${script:REG_SPACE}*=") {
         return ("", $str)
     }
     $key = $Matches["key_name"];

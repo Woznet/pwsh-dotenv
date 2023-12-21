@@ -94,6 +94,26 @@ H=sample
         }
     }
 
+    Describe "ConvertFrom-Dotenv issue #4" {
+
+        It "Empty Value Handling in pwsh-dotenv Module" {
+
+
+            $in = @'
+FOO=
+
+BAR=456
+'@
+
+            $r = $in | ConvertFrom-Dotenv -InitialEnv (@{})
+            $r | Should -MatchHashtable (@{
+                FOO=''
+                BAR='456'
+            }) -Because "<$in>"
+
+        }
+    }
+
 }
 
 
