@@ -3,13 +3,13 @@ Set-StrictMode -Version Latest
 
 class EvaluateContext {
 
-    [scriptblock]$variable_getter
+    [scriptblock]$Variable_Getter
 
-    EvaluateContext([scriptblock]$variable_getter) {
-        $this.variable_getter = $variable_getter
+    EvaluateContext([scriptblock]$Variable_Getter) {
+        $this.Variable_Getter = $Variable_Getter
     }
 
-    [string]GetVariable([string]$variable_name) {
-        return & $this.variable_getter $variable_name
+    [string]GetVariable([string]$Variable_Name) {
+        return & $this.Variable_Getter $Variable_Name
     }
 }

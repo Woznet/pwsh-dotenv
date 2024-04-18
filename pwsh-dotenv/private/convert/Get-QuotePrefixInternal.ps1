@@ -4,7 +4,7 @@ Set-StrictMode -Version Latest
 function Get-QuotePrefixInternal {
     [CmdletBinding()]
     [OutputType([string])]
-    Param (
+    param(
         [string]$InputObject
     )
     if ($InputObject.StartsWith('"')) {
@@ -13,5 +13,5 @@ function Get-QuotePrefixInternal {
     elseif ($InputObject.StartsWith("'")) {
         return "'"
     }
-    return "";
+    return '';
 }

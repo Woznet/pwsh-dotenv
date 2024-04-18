@@ -9,112 +9,112 @@ class ParameterExpansionParser {
 
     [regex]$PREFIX_PATTERN = [regex]'\G(?:[\\$}]|[^\\$}]+)'
 
-    [string]$str
-    [ParameterExpansion]$expansion
+    [string]$Str
+    [ParameterExpansion]$Expansion
 
-    ParameterExpansionParser([string]$str) {
-        $this.str = $str
-        $this.expansion = [ParameterExpansion]::new()
+    ParameterExpansionParser([string]$Str) {
+        $this.Str = $Str
+        $this.Expansion = [ParameterExpansion]::new()
     }
 
     [ParameterExpansion]Parse() {
         [void]$this._Parse(0, 0)
-        return $this.expansion
+        return $this.Expansion
     }
 
-    hidden [int]_Parse([int]$parser_start_index, [int] $nested_levels) {
-        $m = $this.NextMatch($parser_start_index)
+    hidden [int]_Parse([int]$Parser_Start_Index, [int] $Nested_Levels) {
+        $M = $this.NextMatch($Parser_Start_Index)
         for (; ; ) {
-            if (($null -eq $m) -or (-not $m.Success)) {
-                if (0 -lt $nested_levels) {
+            if (($null -eq $M) -or (-not $M.Success)) {
+                if (0 -lt $Nested_Levels) {
                     # } closing curly brace not found
                     return -1
                 }
                 break
             }
 
-            if ($m.Value.StartsWith('}') -and (0 -lt $nested_levels) ) {
+            if ($M.Value.StartsWith('}') -and (0 -lt $Nested_Levels) ) {
                 # } closing curly brace
-                return ($m.Index + $m.Length)
+                return ($M.Index + $M.Length)
             }
-            if ($m.Value.StartsWith('\')) {
+            if ($M.Value.StartsWith('\')) {
                 # escape
-                if(($m.Index + 1) -lt $this.str.Length){
-                    $this.expansion.AddEscapeString(($this.str[$m.Index..($m.Index + 1)] -join ""))
-                    $m = $this.NextMatch($m.Index + 2)
-                }else{
-                    $this.expansion.AddEscapeString(($this.str[$m.Index..($m.Index)] -join ""))
-                    $m = $this.NextMatch($m.Index + 1)
+                if (($M.Index + 1) -lt $this.Str.Length) {
+                    $this.Expansion.AddEscapeString(($this.Str[$M.Index..($M.Index + 1)] -join ''))
+                    $M = $this.NextMatch($M.Index + 2)
+                }
+                else {
+                    $this.Expansion.AddEscapeString(($this.Str[$M.Index..($M.Index)] -join ''))
+                    $M = $this.NextMatch($M.Index + 1)
                 }
             }
-            elseif ($m.Value.StartsWith('$')) {
+            elseif ($M.Value.StartsWith('$')) {
                 # variable
-                $next_index = $this.ParseParameterExpansion($m.Index, $nested_levels)
-                $m = $this.NextMatch($next_index)
+                $Next_Index = $this.ParseParameterExpansion($M.Index, $Nested_Levels)
+                $M = $this.NextMatch($Next_Index)
             }
             else {
-                $this.expansion.AddStringLiteral($m.Value)
-                $m = $m.NextMatch()
+                $this.Expansion.AddStringLiteral($M.Value)
+                $M = $M.NextMatch()
             }
         }
-        return $this.str.Length
+        return $this.Str.Length
     }
 
-    hidden [System.Text.RegularExpressions.Match]NextMatch([int]$index) {
-        if ($index -le $this.str.Length) {
-            return $this.PREFIX_PATTERN.Match($this.str, $index)
+    hidden [System.Text.RegularExpressions.Match]NextMatch([int]$Index) {
+        if ($Index -le $this.Str.Length) {
+            return $this.PREFIX_PATTERN.Match($this.Str, $Index)
         }
         return $null
     }
 
-    hidden [int]ParseParameterExpansion([int]$start_index, [int] $nested_levels) {
-        if ($this.str.IndexOf('${', $start_index, 2) -eq $start_index) {
+    hidden [int]ParseParameterExpansion([int]$Start_Index, [int] $Nested_Levels) {
+        if ($this.Str.IndexOf('${', $Start_Index, 2) -eq $Start_Index) {
             # ${variable} format
-            return $this.ParseCurlyBracesVariableExpansion($start_index, $nested_levels)
+            return $this.ParseCurlyBracesVariableExpansion($Start_Index, $Nested_Levels)
         }
-        $m = ([regex]'\G\$(?<variable_name>[a-zA-Z_][a-zA-Z0-9_]*)').Match($this.str, $start_index)
-        if ($m.Success) {
-            # $variable format
-            $this.expansion.AddSimpleVariable($m.Groups["variable_name"].Value, $m.Value)
-            return ($m.Index + $m.Length)
+        $M = ([regex]'\G\$(?<Variable_Name>[a-zA-Z_][a-zA-Z0-9_]*)').Match($this.Str, $Start_Index)
+        if ($M.Success) {
+            # $Variable format
+            $this.Expansion.AddSimpleVariable($M.Groups['Variable_Name'].Value, $M.Value)
+            return ($M.Index + $M.Length)
         }
-        $this.expansion.AddStringLiteral($this.str[$start_index])
-        return $start_index + 1
+        $this.Expansion.AddStringLiteral($this.Str[$Start_Index])
+        return $Start_Index + 1
     }
 
-    hidden [int]ParseCurlyBracesVariableExpansion([int]$start_index, [int] $nested_levels) {
-        $m = ([regex]'\G\${(?<variable_name>[a-zA-Z_][a-zA-Z0-9_]*)[:}]').Match($this.str, $start_index)
-        if (-not $m.Success) {
-            Write-Warning -Message "$($this.GetType()): bad substitution: $($this.str.Substring($start_index))"
-            return $this.str.Length
+    hidden [int]ParseCurlyBracesVariableExpansion([int]$Start_Index, [int] $Nested_Levels) {
+        $M = ([regex]'\G\${(?<Variable_Name>[a-zA-Z_][a-zA-Z0-9_]*)[:}]').Match($this.Str, $Start_Index)
+        if (-not $M.Success) {
+            Write-Warning -Message "$($this.GetType()): bad substitution: $($this.Str.Substring($Start_Index))"
+            return $this.Str.Length
         }
 
-        $variable_name = $m.Groups["variable_name"].Value
-        if ($m.Value.EndsWith('}')) {
+        $Variable_Name = $M.Groups['Variable_Name'].Value
+        if ($M.Value.EndsWith('}')) {
             # ${variable} format
-            $this.expansion.AddCurlyBracesVariable([SimpleVariableExpression]::new($variable_name, $m.Value), $null, [ParameterExpansionOpTypes]::BASIC_FORM, $m.Value)
-            return ($m.Index + $m.Length)
+            $this.Expansion.AddCurlyBracesVariable([SimpleVariableExpression]::new($Variable_Name, $M.Value), $null, [ParameterExpansionOpTypes]::BASIC_FORM, $M.Value)
+            return ($M.Index + $M.Length)
         }
-        if ($m.Value.EndsWith(':')) {
+        if ($M.Value.EndsWith(':')) {
             # ${variable: format
-            if ("-" -eq $this.str[($m.Index + $m.Length)]) {
+            if ('-' -eq $this.Str[($M.Index + $M.Length)]) {
                 # ${variable:- format
 
-                $p = [ParameterExpansionParser]::new($this.str)
-                $next_index = $p._Parse($start_index + $m.Length + 1, $nested_levels + 1)
-                if ($next_index -lt 0) {
-                    Write-Warning -Message "$($this.GetType()): bad substitution: $($this.str.Substring($start_index))"
-                    return $this.str.Length
+                $P = [ParameterExpansionParser]::new($this.Str)
+                $Next_Index = $P._Parse($Start_Index + $M.Length + 1, $Nested_Levels + 1)
+                if ($Next_Index -lt 0) {
+                    Write-Warning -Message "$($this.GetType()): bad substitution: $($this.Str.Substring($Start_Index))"
+                    return $this.Str.Length
                 }
-                $word = $p.expansion
-                $source = $this.str.Substring($start_index, $next_index - $start_index)
-                $param = [SimpleVariableExpression]::new($variable_name, $source);
-                $this.expansion.AddCurlyBracesVariable($param, $word, [ParameterExpansionOpTypes]::PARAMETER_IS_UNSET_OR_NULL, $source)
-                return $next_index
+                $Word = $P.Expansion
+                $Source = $this.Str.Substring($Start_Index, $Next_Index - $Start_Index)
+                $Param = [SimpleVariableExpression]::new($Variable_Name, $Source);
+                $this.Expansion.AddCurlyBracesVariable($Param, $Word, [ParameterExpansionOpTypes]::PARAMETER_IS_UNSET_OR_NULL, $Source)
+                return $Next_Index
             }
         }
-        Write-Warning -Message "$($this.GetType()): bad substitution: $($this.str.Substring($start_index))"
-        return $this.str.Length
+        Write-Warning -Message "$($this.GetType()): bad substitution: $($this.Str.Substring($Start_Index))"
+        return $this.Str.Length
     }
-
 }

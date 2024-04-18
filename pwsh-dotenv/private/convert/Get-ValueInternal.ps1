@@ -4,20 +4,20 @@ Set-StrictMode -Version Latest
 function Get-ValueInternal {
     [CmdletBinding()]
     [OutputType([Object[]])]
-    Param (
+    param(
         [string]$InputObject
     )
 
-    $str = Remove-SpaceInternal -InputObject $InputObject -TrimStart
+    $Str = Remove-SpaceInternal -InputObject $InputObject -TrimStart
 
-    if ("" -eq $str) {
-        return ([EnvEntry]::new("", [EnumQuoteTypes]::UNQUOTED), "");
+    if ('' -eq $Str) {
+        return ([EnvEntry]::new('', [EnumQuoteTypes]::UNQUOTED), '');
     }
-    $prefix = Get-QuotePrefixInternal $str
-    if ("" -eq $prefix) {
-        return (Get-SimpleValueInternal $str);
+    $Prefix = Get-QuotePrefixInternal $Str
+    if ('' -eq $Prefix) {
+        return (Get-SimpleValueInternal $Str);
     }
     else {
-        return (Get-QuotedValueInternal $str $prefix);
+        return (Get-QuotedValueInternal $Str $Prefix);
     }
 }

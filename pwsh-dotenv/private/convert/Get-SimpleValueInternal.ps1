@@ -4,17 +4,17 @@ Set-StrictMode -Version Latest
 function Get-SimpleValueInternal {
     [CmdletBinding()]
     [OutputType([Object[]])]
-    Param (
+    param(
         [string]$InputObject
     )
 
     # split newline
-    $value, $tail = Split-LineInternal $InputObject
+    $Value, $Tail = Split-LineInternal $InputObject
     # split comment
-    $value = ($value -split "#", 2)[0].Trim()
-    # $value = ($value -split "[ \t\f\v]+#", 2)[0].Trim()
+    $Value = ($Value -split '#', 2)[0].Trim()
+    # $Value = ($Value -split "[ \t\f\v]+#", 2)[0].Trim()
 
-    $env_entry = [EnvEntry]::new($value, [EnumQuoteTypes]::UNQUOTED)
+    $Env_Entry = [EnvEntry]::new($Value, [EnumQuoteTypes]::UNQUOTED)
 
-    return ($env_entry, $tail);
+    return ($Env_Entry, $Tail);
 }

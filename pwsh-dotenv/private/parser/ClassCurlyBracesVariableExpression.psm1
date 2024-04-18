@@ -6,66 +6,66 @@ using module ./EnumParameterExpansionOpTypes.psm1
 Set-StrictMode -Version Latest
 
 class CurlyBracesVariableExpression : Expression {
-    [Expression]$parameter
-    [Expression]$word
-    [ParameterExpansionOpTypes]$op
-    [string]$source
-    CurlyBracesVariableExpression([Expression]$parameter, [Expression]$word, [ParameterExpansionOpTypes]$op, [string]$source) {
-        $this.parameter = $parameter
-        $this.word = $word
-        $this.op = $op
-        $this.source = $source
+    [Expression]$Parameter
+    [Expression]$Word
+    [ParameterExpansionOpTypes]$Op
+    [string]$Source
+    CurlyBracesVariableExpression([Expression]$Parameter, [Expression]$Word, [ParameterExpansionOpTypes]$Op, [string]$Source) {
+        $this.Parameter = $Parameter
+        $this.Word = $Word
+        $this.Op = $Op
+        $this.Source = $Source
     }
-    [string]Evaluate([EvaluateContext]$context) {
-        $val = ""
-        switch ($this.op) {
+    [string]Evaluate([EvaluateContext]$Context) {
+        $Val = ''
+        switch ($this.Op) {
             NOP {
                 # NOP
             }
             BASIC_FORM {
-                $val = $this.EvaluateBasicForm($context)
+                $Val = $this.EvaluateBasicForm($Context)
             }
             PARAMETER_IS_UNSET_OR_NULL {
-                $val = $this.EvaluateParameterIsUnsetOrNull($context)
+                $Val = $this.EvaluateParameterIsUnsetOrNull($Context)
             }
         }
-        Write-Debug -Message "$($this.GetType())($($this.op)): $($this.source) => ${val}"
-        return $val
+        Write-Debug -Message "$($this.GetType())($($this.Op)): $($this.Source) => ${Val}"
+        return $Val
     }
 
     [string]ToString() {
         return $this.variable
     }
 
-    hidden [string]EvaluateBasicForm([EvaluateContext]$context) {
-        $val = & {
+    hidden [string]EvaluateBasicForm([EvaluateContext]$Context) {
+        $Val = & {
             $DebugPreference = '';
-            if ($null -eq $this.parameter) {
-                return ""
+            if ($null -eq $this.Parameter) {
+                return ''
             }
             else {
-                return $this.parameter.Evaluate($context)
+                return $this.Parameter.Evaluate($Context)
             }
         }
-        return $val
+        return $Val
     }
 
-    hidden [string]EvaluateParameterIsUnsetOrNull([EvaluateContext]$context) {
-        $val = & {
+    hidden [string]EvaluateParameterIsUnsetOrNull([EvaluateContext]$Context) {
+        $Val = & {
             $DebugPreference = '';
-            if ($null -eq $this.parameter) {
-                return ""
+            if ($null -eq $this.Parameter) {
+                return ''
             }
             else {
-                return $this.parameter.Evaluate($context)
+                return $this.Parameter.Evaluate($Context)
             }
         }
-        if ($val -eq "") {
-            if ($null -ne $this.word) {
-                $val = $this.word.Evaluate($context)
+        if ($Val -eq '') {
+            if ($null -ne $this.Word) {
+                $Val = $this.Word.Evaluate($Context)
             }
         }
-        return $val
+        return $Val
     }
 }
 

@@ -4,25 +4,25 @@ Set-StrictMode -Version Latest
 function Split-KeyValueInternal {
     [CmdletBinding()]
     [OutputType([Object[]])]
-    Param (
+    param(
         [string]$InputObject
     )
 
-    $key, $tail = Get-KeyNameInternal $InputObject
-    if ("" -eq $key) {
-        $first, $tail = Split-LineInternal $tail
-        Write-Warning -Message "invalid line:$first"
-        return ($null, $tail)
+    $Key, $Tail = Get-KeyNameInternal $InputObject
+    if ('' -eq $Key) {
+        $First, $Tail = Split-LineInternal $Tail
+        Write-Warning -Message "invalid line:$First"
+        return ($null, $Tail)
     }
 
-    $env_entry, $tail = Get-ValueInternal $tail
+    $Env_Entry, $Tail = Get-ValueInternal $Tail
 
-    if ($key -notmatch "${script:REG_START}${script:REG_KEY}${script:REG_END}") {
-        Write-Error "unexpected character `"$key`" in variable name near $InputObject" -Category ParserError
-        return ($null, $tail)
+    if ($Key -notmatch "${script:REG_START}${script:REG_KEY}${script:REG_END}") {
+        Write-Error ('unexpected character "{0}" in variable name near {1}' -f $Key, $InputObject) -Category ParserError
+        return ($null, $Tail)
     }
 
-    $env_entry.Name = $key;
+    $Env_Entry.Name = $Key;
 
-    return ($env_entry, $tail)
+    return ($Env_Entry, $Tail)
 }

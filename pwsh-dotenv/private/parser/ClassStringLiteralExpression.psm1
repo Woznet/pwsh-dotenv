@@ -5,11 +5,11 @@ using module ./ClassExpression.psm1
 Set-StrictMode -Version Latest
 
 class StringLiteralExpression : Expression {
-    [string]$value
-    StringLiteralExpression([string]$value) {
-        $this.value = $value
+    [string]$Value
+    StringLiteralExpression([string]$Value) {
+        $this.Value = $Value
     }
-    [string]Evaluate([EvaluateContext]$context) {
-        return $this.value
+    [string]Evaluate([EvaluateContext]$Context) {
+        return $this.Value
     }
 }

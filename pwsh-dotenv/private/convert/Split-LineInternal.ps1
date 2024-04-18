@@ -4,16 +4,16 @@ Set-StrictMode -Version Latest
 function Split-LineInternal {
     [CmdletBinding()]
     [OutputType([string[]])]
-    Param (
+    param(
         [string]$InputObject
     )
 
-    $lines = $InputObject -split "\n", 2
-    $first = $lines[0]
-    $second = ""
-    if (1 -lt $lines.Count) {
-        $second = $lines[1]
+    $Lines = $InputObject -split '\n', 2
+    $First = $Lines[0]
+    $Second = ''
+    if (1 -lt $Lines.Count) {
+        $Second = $Lines[1]
     }
 
-    return ($first, $second)
+    return ($First, $Second)
 }

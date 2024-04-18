@@ -4,34 +4,33 @@ Set-StrictMode -Version Latest
 function Get-QuotedValueInternal {
     [CmdletBinding()]
     [OutputType([Object[]])]
-    Param (
+    param(
         [string]$InputObject,
         [string]$Quote
     )
 
-    $reg_quote = [regex]::Escape($Quote)
+    $Reg_Quote = [regex]::Escape($Quote)
 
-    $value_pattern = "${script:REG_START}${reg_quote}(?<value>(?:\\\\|\\${reg_quote}|[^${reg_quote}])*)${reg_quote}${script:REG_SPACE}*(?:#[^\r\n]+)?${script:REG_END}?"
-    if ($InputObject -notmatch $value_pattern) {
+    $Value_pattern = "${script:REG_START}${Reg_Quote}(?<value>(?:\\\\|\\${Reg_Quote}|[^${Reg_Quote}])*)${Reg_Quote}${script:REG_SPACE}*(?:#[^\r\n]+)?${script:REG_END}?"
+    if ($InputObject -notmatch $Value_pattern) {
         # broken string
-        $first, $tail = Split-LineInternal $tail
-        Write-Error "broken quoted value string ${first}" -Category ParserError
-        return [EnvEntry]::new("", [EnumQuoteTypes]::UNQUOTED), $tail;
+        $First, $Tail = Split-LineInternal $Tail
+        Write-Error ('broken quoted value string {0}' -f $First) -Category ParserError
+        return [EnvEntry]::new('', [EnumQuoteTypes]::UNQUOTED), $Tail;
     }
-    $value = $Matches["value"]
-    $tail = $InputObject.Substring($Matches[0].Length)
+    $Value = $Matches['value']
+    $Tail = $InputObject.Substring($Matches[0].Length)
 
     if (('"' -eq $Quote)) {
-        $quote_type = [EnumQuoteTypes]::DOUBLE_QUOTED
+        $Quote_Type = [EnumQuoteTypes]::DOUBLE_QUOTED
     }
     elseif (("'" -eq $Quote)) {
-        $quote_type = [EnumQuoteTypes]::SINGLE_QUOTED
+        $Quote_Type = [EnumQuoteTypes]::SINGLE_QUOTED
     }
     else {
-        $quote_type = [EnumQuoteTypes]::UNQUOTED
+        $Quote_Type = [EnumQuoteTypes]::UNQUOTED
     }
-    $env_entry = [EnvEntry]::new($value, $quote_type)
+    $Env_Entry = [EnvEntry]::new($Value, $Quote_Type)
 
-    return $env_entry, $tail;
-
+    return $Env_Entry, $Tail;
 }

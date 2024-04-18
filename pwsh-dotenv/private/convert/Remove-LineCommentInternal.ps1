@@ -11,35 +11,34 @@ function Remove-LineCommentInternal {
     Begin {
 
         function trimComment {
-            param ($str)
-            $str = $str.TrimStart()
-            if ("" -eq $str) {
-                return $str
+            param($Str)
+            $Str = $Str.TrimStart()
+            if ('' -eq $Str) {
+                return $Str
             }
-            if ("#" -ne $str[0]) {
-                return $str
+            if ('#' -ne $Str[0]) {
+                return $Str
             }
             # split newline
-            $first, $tail = Split-LineInternal $str
-            return $tail
+            $First, $Tail = Split-LineInternal $Str
+            return $Tail
         }
-
     }
     Process {
-        $str = $InputObject
-        if ($null -eq $str) {
-            $str = ""
+        $Str = $InputObject
+        if ($null -eq $Str) {
+            $Str = ''
         }
-        $prev_str = $str
-        while ($true) {
-            $str = trimComment $str
-            if ("" -eq $str) {
-                return $str;
+        $Prev_Str = $Str
+        while ($True) {
+            $Str = trimComment $Str
+            if ('' -eq $Str) {
+                return $Str;
             }
-            if ($prev_str -eq $str) {
-                return $str;
+            if ($Prev_Str -eq $Str) {
+                return $Str;
             }
-            $prev_str = $str
+            $Prev_Str = $Str
         }
     }
 }

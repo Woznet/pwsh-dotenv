@@ -5,38 +5,38 @@ using module ./ClassExpression.psm1
 Set-StrictMode -Version Latest
 
 class SingleQuoteStringExpression : Expression {
-    [string]$value
-    SingleQuoteStringExpression([string]$value) {
-        $this.value = $value
+    [string]$Value
+    SingleQuoteStringExpression([string]$Value) {
+        $this.Value = $Value
     }
-    [string]Evaluate([EvaluateContext]$context) {
-        return [regex]::Replace($this.value, "\\\\|\\'", {
-                Param([System.Text.RegularExpressions.Match]$match)
-                $val = ""
-                switch -CaseSensitive ($match.Value) {
-                    "\\" {
-                        $val = "\"
+    [string]Evaluate([EvaluateContext]$Context) {
+        return [regex]::Replace($this.Value, "\\\\|\\'", {
+                Param([System.Text.RegularExpressions.Match]$Match)
+                $Val = ''
+                switch -CaseSensitive ($Match.Value) {
+                    '\\' {
+                        $Val = '\'
                     }
                     "\'" {
-                        $val = "'"
+                        $Val = "'"
                     }
                 }
-                if ("" -eq $val) {
-                    Write-Warning -Message ("unsupported escape " + $this.value)
-                    if ('\' -eq $this.value) {
-                        $val = '\'
+                if ('' -eq $Val) {
+                    Write-Warning -Message ('unsupported escape {0}' -f $this.Value)
+                    if ('\' -eq $this.Value) {
+                        $Val = '\'
                     }
-                    elseif ($this.value.StartsWith('\')) {
-                        $val = $this.value.Substring(1)
+                    elseif ($this.Value.StartsWith('\')) {
+                        $Val = $this.Value.Substring(1)
                     }
                     else {
-                        $val = $this.value
+                        $Val = $this.Value
                     }
                 }
-                return $val
+                return $Val
             })
     }
     [string]ToString() {
-        return $this.value
+        return $this.Value
     }
 }

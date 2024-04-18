@@ -8,8 +8,8 @@ Set-StrictMode -Version Latest
 
 class EnvEntry {
 
-    [string]$Name = ""
-    [string]$Value = ""
+    [string]$Name = ''
+    [string]$Value = ''
     [EnumQuoteTypes]$QuoteType
 
     EnvEntry([string]$Value, [EnumQuoteTypes]$QuoteType) {
@@ -17,30 +17,28 @@ class EnvEntry {
         $this.QuoteType = $QuoteType
     }
 
-    [string]GetValue([scriptblock]$env_getter) {
+    [string]GetValue([scriptblock]$Env_Getter) {
         if ((-not ($this.Value.Contains('$') -or $this.Value.Contains('\')))) {
             return $this.Value
         }
 
         if ($this.QuoteType -eq [EnumQuoteTypes]::SINGLE_QUOTED) {
-            $expansion = [SingleQuoteStringExpression]::new($this.Value)
+            $Expansion = [SingleQuoteStringExpression]::new($this.Value)
         }
         else {
-            $parser = [ParameterExpansionParser]::new($this.Value)
-            $expansion = $parser.Parse()
+            $Parser = [ParameterExpansionParser]::new($this.Value)
+            $Expansion = $Parser.Parse()
         }
 
-        $valuate_context = [EvaluateContext]::new({
-                param($variable_name)
-                return (& $env_getter ($variable_name))
+        $Valuate_Context = [EvaluateContext]::new({
+                param($Variable_Name)
+                return (& $Env_Getter ($Variable_Name))
             })
 
-        return $expansion.Evaluate($valuate_context)
-
+        return $Expansion.Evaluate($Valuate_Context)
     }
 
     [string]ToString() {
-        return $this.Name + "=" + $this.Value
+        return ('{0}={1}' -f $this.Name, $this.Value)
     }
-
 }

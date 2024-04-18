@@ -1,16 +1,16 @@
 #requires -Version 5
 Set-StrictMode -Version Latest
 
-function Get-KeyNameInternal(){
+function Get-KeyNameInternal() {
     [CmdletBinding()]
     [OutputType([string[]])]
-    Param (
-        [string]$str
+    param(
+        [string]$Str
     )
-    if ($str -notmatch "${script:REG_START}(?:export${script:REG_SPACE}+)?(?<key_name>\w+)${script:REG_SPACE}*=") {
-        return ("", $str)
+    if ($Str -notmatch "${script:REG_START}(?:export${script:REG_SPACE}+)?(?<key_name>\w+)${script:REG_SPACE}*=") {
+        return ('', $Str)
     }
-    $key = $Matches["key_name"];
-    $tail = $str.Substring($Matches[0].Length)
-    return ($key, $tail)
+    $Key = $Matches['key_name'];
+    $Tail = $Str.Substring($Matches[0].Length)
+    return ($Key, $Tail)
 }

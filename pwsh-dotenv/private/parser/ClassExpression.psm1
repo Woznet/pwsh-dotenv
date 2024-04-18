@@ -4,7 +4,7 @@ using module ./ClassEvaluateContext.psm1
 Set-StrictMode -Version Latest
 
 class Expression {
-    [string]Evaluate([EvaluateContext]$context) {
-        throw("Not Implement")
+    [string]Evaluate([EvaluateContext]$Context) {
+        throw('Not Implement')
     }
 }

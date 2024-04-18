@@ -5,24 +5,24 @@ using module ./ClassExpression.psm1
 Set-StrictMode -Version Latest
 
 class SimpleVariableExpression : Expression {
-    [string]$variable_name
-    [string]$source
-    SimpleVariableExpression([string]$variable_name, [string]$source) {
-        $this.variable_name = $variable_name
-        $this.source = $source
+    [string]$Variable_Name
+    [string]$Source
+    SimpleVariableExpression([string]$Variable_Name, [string]$Source) {
+        $this.Variable_Name = $Variable_Name
+        $this.Source = $Source
     }
-    [string]Evaluate([EvaluateContext]$context) {
-        if ("" -eq $this.variable_name) {
-            $val = ""
+    [string]Evaluate([EvaluateContext]$Context) {
+        if ('' -eq $this.Variable_Name) {
+            $Val = ''
         }
         else {
-            $val = $context.GetVariable($this.variable_name)
+            $Val = $Context.GetVariable($this.Variable_Name)
         }
-        Write-Debug -Message "$($this.GetType()): ${this} => ${val}"
-        return $val
+        Write-Debug -Message ('{0}: {1} => {2}' -f $this.GetType(), $this, $Val)
+        return $Val
     }
     [string]ToString() {
-        return $this.source
+        return $this.Source
     }
 }
 

@@ -1,54 +1,55 @@
-using module ./ClassEvaluateContext.psm1
+using module ./ClassEValuateContext.psm1
 using module ./ClassExpression.psm1
 
 #requires -Version 5
 Set-StrictMode -Version Latest
 
 class EscapeStringExpression : Expression {
-    [string]$value
-    EscapeStringExpression([string]$value) {
-        $this.value = $value
+    [string]$Value
+    EscapeStringExpression([string]$Value) {
+        $this.Value = $Value
     }
-    [string]Evaluate([EvaluateContext]$context) {
-        $val = ""
-        switch -CaseSensitive ($this.value) {
+    [string]EValuate([EValuateContext]$Context) {
+        $Val = ''
+        switch -CaseSensitive ($this.Value) {
             '\t' {
-                $val = "`t"
+                $Val = "`t"
             }
             '\r' {
-                $val = "`r"
+                $Val = "`r"
             }
             '\n' {
-                $val = "`n"
+                $Val = "`n"
             }
             '\$' {
-                $val = '$'
+                $Val = '$'
             }
             '\\' {
-                $val = '\'
+                $Val = '\'
             }
             '\"' {
-                $val = '"'
+                $Val = '"'
             }
             '\''' {
-                $val = ''''
+                $Val = ''''
             }
         }
-        if ("" -eq $val) {
-            Write-Warning -Message ("unsupported escape " + $this.value)
-            if('\' -eq $this.value){
-                $val = '\'
-            }elseif ($this.value.StartsWith('\')) {
-                $val = $this.value.Substring(1)
+        if ('' -eq $Val) {
+            Write-Warning -Message ('unsupported escape ' + $this.Value)
+            if ('\' -eq $this.Value) {
+                $Val = '\'
+            }
+            elseif ($this.Value.StartsWith('\')) {
+                $Val = $this.Value.Substring(1)
             }
             else {
-                $val = $this.value
+                $Val = $this.Value
             }
         }
-        Write-Debug -Message "$($this.GetType()): ${this} => ${val}"
-        return $val
+        Write-Debug -Message "$($this.GetType()): ${this} => ${Val}"
+        return $Val
     }
     [string]ToString() {
-        return $this.value
+        return $this.Value
     }
 }

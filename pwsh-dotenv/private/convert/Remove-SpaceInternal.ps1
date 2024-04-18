@@ -5,7 +5,7 @@ function Remove-SpaceInternal {
     [CmdletBinding()]
     [OutputType([string])]
     [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '', Scope = 'Function')]
-    Param (
+    param(
         [string]$InputObject,
         [switch]$TrimStart,
         [switch]$TrimEnd,
@@ -13,19 +13,19 @@ function Remove-SpaceInternal {
     )
 
     if ($IncludeNewLine) {
-        $removeChar = " `t`f`v`n`r"
+        $RemoveChar = " `t`f`v`n`r"
     }
     else {
-        $removeChar = " `t`f`v"
+        $RemoveChar = " `t`f`v"
     }
 
     if ($TrimStart -and $TrimEnd) {
-        $InputObject.Trim($removeChar)
+        $InputObject.Trim($RemoveChar)
     }
     elseif ($TrimStart) {
-        $InputObject.TrimStart($removeChar)
+        $InputObject.TrimStart($RemoveChar)
     }
     elseif ($TrimEnd) {
-        $InputObject.TrimEnd($removeChar)
+        $InputObject.TrimEnd($RemoveChar)
     }
 }

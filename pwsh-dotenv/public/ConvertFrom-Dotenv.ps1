@@ -15,66 +15,66 @@ function ConvertFrom-Dotenv {
         DEF                            3
 
     #>
-    [CmdletBinding(DefaultParametersetName = "Hashtable")]
-    [OutputType([hashtable], ParameterSetName = "Hashtable")]
-    [OutputType("EnvEntry[]", ParameterSetName = "EnvEntry")]
-    Param(
+    [CmdletBinding(DefaultParametersetName = 'Hashtable')]
+    [OutputType([hashtable], ParameterSetName = 'Hashtable')]
+    [OutputType('EnvEntry[]', ParameterSetName = 'EnvEntry')]
+    param(
         # Specifies the .env strings to convert to  a Hashtable or a EnvEntry array.
-        [Parameter(Position = 0 , ValueFromPipeline, ParameterSetName = "Hashtable")]
-        [Parameter(Position = 0 , ValueFromPipeline, ParameterSetName = "EnvEntry")]
+        [Parameter(Position = 0 , ValueFromPipeline, ParameterSetName = 'Hashtable')]
+        [Parameter(Position = 0 , ValueFromPipeline, ParameterSetName = 'EnvEntry')]
         [string[]]$InputObject,
         # Environment variables for variable expansion; defaults to retrieving from the Env: drive.
-        [Parameter(ParameterSetName = "Hashtable")]
+        [Parameter(ParameterSetName = 'Hashtable')]
         [System.Collections.IDictionary]$InitialEnv = (Get-EnvHashtableInternal),
         # Enables the behavior to OVERRIDE environment variables.
-        [Parameter(ParameterSetName = "Hashtable")]
+        [Parameter(ParameterSetName = 'Hashtable')]
         [switch]$AllowClobber,
         # Converts the Dotenv to an EnvEntry object.
-        [Parameter(ParameterSetName = "EnvEntry")]
+        [Parameter(ParameterSetName = 'EnvEntry')]
         [switch]$AsEnvEntry
     )
     Begin {
-        $dotenv_list = [System.Collections.ArrayList]::new()
-        function parseDotFile ([string]$str) {
-            $prev_str = $str
+        $Dotenv_List = [System.Collections.ArrayList]::new()
+        function ParseDotFile ([string]$Str) {
+            $Prev_Str = $Str
             while ($true) {
-                if ("" -eq $str) {
+                if ('' -eq $Str) {
                     break;
                 }
-                $str = Remove-LineCommentInternal $str
-                $env_entry, $str = Split-KeyValueInternal $str
-                if ($null -ne $env_entry) {
-                    Write-Debug "parse dotenv: $env_entry"
-                    $null = $dotenv_list.Add($env_entry)
+                $Str = Remove-LineCommentInternal $Str
+                $Env_Entry, $Str = Split-KeyValueInternal $Str
+                if ($null -ne $Env_Entry) {
+                    Write-Debug ('parse dotenv: {0}' -f $Env_Entry)
+                    $null = $Dotenv_List.Add($Env_Entry)
                 }
-                if ($prev_str -eq $str) {
+                if ($Prev_Str -eq $Str) {
                     break;
                 }
-                if ($null -eq $str) {
-                    $str = ""
+                if ($null -eq $Str) {
+                    $Str = ''
                 }
-                $prev_str = $str
+                $Prev_Str = $Str
             }
         }
     }
     Process {
         $InputObject | ForEach-Object {
-            parseDotFile $_
+            ParseDotFile $_
         }
     }
     End {
 
         if ($AsEnvEntry) {
-            return $dotenv_list.ToArray()
+            return $Dotenv_List.ToArray()
         }
         else {
-            $envs = New-HashTbaleInternal
+            $Envs = New-HashTableInternal
             if ($null -eq $InitialEnv) {
                 $InitialEnv = @{}
             }
 
-            $envs = $dotenv_list | Merge-EnvEntryInternal -InitialEnv $InitialEnv -AllowClobber:$AllowClobber
-            return $envs;
+            $Envs = $Dotenv_List | Merge-EnvEntryInternal -InitialEnv $InitialEnv -AllowClobber:$AllowClobber
+            return $Envs;
         }
     }
 }

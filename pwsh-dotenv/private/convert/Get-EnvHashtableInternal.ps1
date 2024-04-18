@@ -1,14 +1,14 @@
 #requires -Version 5
 Set-StrictMode -Version Latest
 
-function Get-EnvHashtableInternal() {
+function Get-EnvHashTableInternal {
     [CmdletBinding()]
     [OutputType([System.Collections.IDictionary])]
-    Param ()
+    param()
 
-    $envs = New-HashTbaleInternal
-    foreach ($entry in (Get-ChildItem "${script:EnvDriveName}:")) {
-        $envs[$entry.Name] = $entry.Value
+    $Envs = New-HashTableInternal
+    foreach ($Entry in (Get-ChildItem "${script:EnvDriveName}:")) {
+        $Envs[$Entry.Name] = $Entry.Value
     }
-    return $envs
+    return $Envs
 }
