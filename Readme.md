@@ -1,7 +1,7 @@
 
 # pwsh-dotenv
 
-pwsh-dotenv to load environment variables from `.env` .
+pwsh-dotenv to load environment variables from `.env` .  
 Source: https://gitlab.com/kamiyonanayo/pwsh-dotenv
 
 ## Installation
